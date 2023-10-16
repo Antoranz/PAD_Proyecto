@@ -39,18 +39,18 @@ public class User {
         return expenseList;
     }
 
-    public void addExpense(double moneySpent, Expense e) {
+    public void addExpense(Expense e) {
         if (expenseList == null) {
             expenseList = new ArrayList<>();
         }
 
-        totalMoneySpent += moneySpent;
+        totalMoneySpent += e.getMoneySpent();
         expenseList.add(e);
         expenseList.sort((expense1, expense2) -> expense1.getTimeDate().compareTo(expense2.getTimeDate()));
     }
 
-    public void deleteExpense(double moneySpent, Expense e) {
-        totalMoneySpent -= moneySpent;
+    public void deleteExpense(Expense e) {
+        totalMoneySpent -= e.getMoneySpent();
         expenseList.remove(e);
     }
 
