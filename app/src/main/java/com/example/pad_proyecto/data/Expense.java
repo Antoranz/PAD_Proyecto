@@ -3,10 +3,11 @@ package com.example.pad_proyecto.data;
 import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Expense {
+public class Expense implements Serializable {
 
     private String expenseName;
     private Double moneySpent;
