@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/yellow</item>
         <item name="android:colorButtonNormal">@color/yellow</item>
+        <item name="android:buttonTint">@color/yellow</item>
 
 
         <!-- Customize your theme here. -->
