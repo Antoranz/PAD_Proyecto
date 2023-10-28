@@ -9,6 +9,8 @@ import java.util.Calendar;
 
 public class Expense implements Serializable {
 
+    private long id;
+    private long userId;
     private String expenseName;
     private Double moneySpent;
     private Calendar timeDate;
@@ -17,7 +19,7 @@ public class Expense implements Serializable {
     private PayMethod payMethod;
     private String note;
 
-    public Expense(String e, Double m, Calendar d, String path, ExpenseType c, PayMethod p, String n) {
+    public Expense(long ui, String e, Double m, Calendar d, String path, ExpenseType c, PayMethod p, String n) {
         expenseName = e;
         moneySpent = m;
         timeDate = d;
@@ -25,6 +27,7 @@ public class Expense implements Serializable {
         category = c;
         payMethod = p;
         note = n;
+        userId = ui;
     }
 
     public String getImagePath() {
@@ -59,5 +62,15 @@ public class Expense implements Serializable {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return sdf.format(timeDate.getTime());
     }
+
+    public long getExpenseId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getUserId() {return userId;}
 }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpendWise</string>
+    <string name="addExpenseText">Añadir Gasto</string>
 </resources>

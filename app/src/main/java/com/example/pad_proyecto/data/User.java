@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+    private long id;
     private String userName;
     private double totalMoneySpent = 0.0;
-    private double budget = 0.0;
+    private double budget;
     private List<Expense> expenseList;
 
     public User(String userName) {
@@ -18,13 +20,18 @@ public class User {
         budget = b;
         expenseList = el;
     }
-
+    public long getId(){return id;}
+    public void setId(long id){this.id= id;}
     public String getUserName() {
         return userName;
     }
 
     public double getTotalMoneySpent() {
         return totalMoneySpent;
+    }
+
+    public void setTotalMoneySpent(double tm){
+        totalMoneySpent=tm;
     }
 
     public void setBudget(double b) {
