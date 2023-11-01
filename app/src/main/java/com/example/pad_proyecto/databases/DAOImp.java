@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ExpenseDAOImp extends SQLiteOpenHelper implements ExpenseDAO{
+public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "spendwise.db";
@@ -39,14 +39,14 @@ public class ExpenseDAOImp extends SQLiteOpenHelper implements ExpenseDAO{
     private static final String COLUMN_BUDGET = "budget";
     private static final String COLUMN_USER_TOTALMONEY = "totalMonaySpent";
 
-    private static ExpenseDAOImp instance;
-    public static synchronized ExpenseDAOImp getInstance(Context context) {
+    private static DAOImp instance;
+    public static synchronized DAOImp getInstance(Context context) {
         if (instance == null) {
-            instance = new ExpenseDAOImp(context.getApplicationContext());
+            instance = new DAOImp(context.getApplicationContext());
         }
         return instance;
     }
-    public ExpenseDAOImp(@Nullable Context context) {
+    public DAOImp(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if (!checkDatabaseExists(context)) {
             getWritableDatabase();

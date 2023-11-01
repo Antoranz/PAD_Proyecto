@@ -12,9 +12,6 @@ import com.example.pad_proyecto.enums.PayMethod;
 import java.util.List;
 
 public interface ExpenseDAO {
-    public void addUser(User user);
-    public List<User> getAllUser();
-    public void updateUserBudget(long id, double budget);
     public void addExpense(@NonNull Expense expense);
     public void updateExpense(@NonNull Expense expense);
     public void deleteExpense(long expenseId);

@@ -1,9 +1,10 @@
 package com.example.pad_proyecto.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     private long id;
     private String userName;
