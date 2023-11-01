@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User u = new User("Victor");
+        /*User u = new User("Victor");
         Controller.getInstance().setUser(u,this);
         Expense e = new Expense(u.getId(),"Compra",15.2, Calendar.getInstance(), null, ExpenseType.Alimentacion, PayMethod.Efectivo, "");
-        Controller.getInstance().addExpense(e,this);
+        Controller.getInstance().addExpense(e,this);*/
     }
 
 }
