@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.pad_proyecto.activities.AddUserActivity;
 import com.example.pad_proyecto.activities.MainActivity;
+import com.example.pad_proyecto.activities.OpenActivity;
 import com.example.pad_proyecto.data.Expense;
 
 public class NavigationManager {
@@ -16,6 +18,7 @@ public class NavigationManager {
         if (instance == null) {
             instance = new NavigationManager();
         }
+        instance = new NavigationManager();
         return instance;
     }
 
@@ -46,5 +49,15 @@ public class NavigationManager {
         } else {
             Log.d("TAG","Error al cambiar a la pantalla del Historial");
         }*/
+    }
+
+    public void navigateToAddUserView(Context context) {
+        if (context != null) {
+            Intent intent = new Intent(context, AddUserActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } else {
+            Log.d("TAG","Error al cambiar a la pantalla de AddUser");
+        }
     }
 }

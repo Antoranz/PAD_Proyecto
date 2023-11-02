@@ -27,7 +27,7 @@ public class OpenActivity extends AppCompatActivity {
                 if(u!=null){
                     changeActivity();
                 }else{
-                    //Inicializar usuario
+                    changeUserActivity();
                 }
             }
         }, 3000);
@@ -36,4 +36,5 @@ public class OpenActivity extends AppCompatActivity {
     public void changeActivity(){
         NavigationManager.getInstance().navigateToMenuView(this);
     }
+    public void changeUserActivity(){NavigationManager.getInstance().navigateToAddUserView(this);}
 }

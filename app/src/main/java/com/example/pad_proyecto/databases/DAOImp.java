@@ -42,8 +42,9 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
     private static DAOImp instance;
     public static synchronized DAOImp getInstance(Context context) {
         if (instance == null) {
-            instance = new DAOImp(context.getApplicationContext());
+            instance = new DAOImp(context);
         }
+        instance = new DAOImp(context);
         return instance;
     }
     public DAOImp(@Nullable Context context) {
@@ -160,18 +161,16 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
-                long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
-                String userName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USER_NAME));
-                Double budget = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_BUDGET));
-                Double tmoney = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_USER_TOTALMONEY));
-                User u = new User(userName);
-                u.setBudget(budget);
-                u.setId(userId);
-                u.setTotalMoneySpent(tmoney);
-                userList.add(u);
-            }
+        while (cursor.moveToNext()) {
+            long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
+            String userName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USER_NAME));
+            Double budget = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_BUDGET));
+            Double tmoney = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_USER_TOTALMONEY));
+            User u = new User(userName);
+            u.setBudget(budget);
+            u.setId(userId);
+            u.setTotalMoneySpent(tmoney);
+            userList.add(u);
         }
 
         cursor.close();
@@ -240,33 +239,30 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
         List<Expense> expenseList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM " + TABLE_EXPENSE +" WHERE " + COLUMN_USER_ID+" ="+uId;
+        String selectQuery = "SELECT * FROM " + TABLE_EXPENSE +" WHERE (" + COLUMN_USER_ID+" = "+uId+");";
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
-                long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
-                long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
-                String expenseName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
-                double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
+        while (cursor.moveToNext()) {
+            long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
+            long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
+            String expenseName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
+            double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
-                long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-                Calendar timeDate = Calendar.getInstance();
-                timeDate.setTimeInMillis(timeDateInMillis);
+            long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
+            Calendar timeDate = Calendar.getInstance();
+            timeDate.setTimeInMillis(timeDateInMillis);
 
-                String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH));
-                String expenseType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SPENT_TYPE));
-                String payMethod = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PAY_METHOD));
-                String note = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTE));
+            String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH));
+            String expenseType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SPENT_TYPE));
+            String payMethod = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PAY_METHOD));
+            String note = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTE));
 
-                Expense expense = new Expense(userId,expenseName, moneySpent, timeDate, imagePath, ExpenseType.valueOf(expenseType), PayMethod.valueOf(payMethod), note);
-                expense.setId(id);
+            Expense expense = new Expense(userId,expenseName, moneySpent, timeDate, imagePath, ExpenseType.valueOf(expenseType), PayMethod.valueOf(payMethod), note);
+            expense.setId(id);
 
-                expenseList.add(expense);
-            }
+            expenseList.add(expense);
         }
-
         cursor.close();
         db.close();
 

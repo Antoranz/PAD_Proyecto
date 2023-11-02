@@ -21,7 +21,7 @@ public class Controller {
         return instance;
     }
 
-    public void setUser(User u,Context c){
+    public void addUser(User u,Context c){
         this.u = u;
         UserDAO dao = DAOImp.getInstance(c);
         dao.addUser(u);
