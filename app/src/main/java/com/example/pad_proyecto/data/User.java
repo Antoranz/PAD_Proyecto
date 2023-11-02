@@ -9,16 +9,14 @@ public class User implements Serializable {
     private long id;
     private String userName;
     private double totalMoneySpent = 0.0;
-    private double budget;
+    private Double budget;
     private List<Expense> expenseList;
 
     public User(String userName) {
         this.userName = userName;
     }
 
-    public void initInfo(double tms, double b, List<Expense> el) {
-        totalMoneySpent = tms;
-        budget = b;
+    public void initInfo(List<Expense> el) {
         expenseList = el;
     }
     public long getId(){return id;}
@@ -39,7 +37,7 @@ public class User implements Serializable {
         budget = b;
     }
 
-    public double getBudget() {
+    public Double getBudget() {
         return budget;
     }
 

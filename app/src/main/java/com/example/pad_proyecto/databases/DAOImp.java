@@ -164,7 +164,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             while (cursor.moveToNext()) {
                 long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
                 String userName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USER_NAME));
-                Double budget = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
+                Double budget = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_BUDGET));
                 Double tmoney = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_USER_TOTALMONEY));
                 User u = new User(userName);
                 u.setBudget(budget);
@@ -236,11 +236,11 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
 
         db.close();
     }
-    public List<Expense> getAllExpenses() {
+    public List<Expense> getAllExpenses(long uId) {
         List<Expense> expenseList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM " + TABLE_EXPENSE;
+        String selectQuery = "SELECT * FROM " + TABLE_EXPENSE +" WHERE " + COLUMN_USER_ID+" ="+uId;
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 

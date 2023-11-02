@@ -15,7 +15,7 @@ public interface ExpenseDAO {
     public void addExpense(@NonNull Expense expense);
     public void updateExpense(@NonNull Expense expense);
     public void deleteExpense(long expenseId);
-    public List<Expense> getAllExpenses();
+    public List<Expense> getAllExpenses(long uId);
     public void clearExpenseTable();
     public List<Expense> getExpensesByExpenseType(@NonNull ExpenseType expenseType);
     public List<Expense> getExpensesByPayMethod(@NonNull PayMethod payMethod);
