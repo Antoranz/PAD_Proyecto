@@ -60,4 +60,8 @@ public class NavigationManager {
             Log.d("TAG","Error al cambiar a la pantalla de AddUser");
         }
     }
+
+    public void navigateToEditExpenseView(Context context){
+
+    }
 }

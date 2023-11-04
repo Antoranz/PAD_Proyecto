@@ -8,6 +8,8 @@ import com.example.pad_proyecto.databases.DAOImp;
 import com.example.pad_proyecto.databases.ExpenseDAO;
 import com.example.pad_proyecto.databases.UserDAO;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Controller {
@@ -41,6 +43,15 @@ public class Controller {
             u.initInfo(daoE.getAllExpenses(u.getId()));
         }
 
+    }
+    public LinkedList<Expense> searchExpense(String s, Context c){
+        LinkedList<Expense> expensesList = new LinkedList<>();
+        for(Expense e:u.getExpensesList()){
+            if(e.getExpenseName().toLowerCase().contains(s.toLowerCase())){
+                expensesList.add(e);
+            }
+        }
+        return expensesList;
     }
     public User getUser(){
         return u;
