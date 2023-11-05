@@ -7,9 +7,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pad_proyecto.R;
+import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.data.User;
+import com.example.pad_proyecto.enums.ExpenseType;
+import com.example.pad_proyecto.enums.PayMethod;
 import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.NavigationManager;
+
+import java.util.Calendar;
 
 public class OpenActivity extends AppCompatActivity {
 

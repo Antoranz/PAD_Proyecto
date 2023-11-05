@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.pad_proyecto.activities.AddUserActivity;
+import com.example.pad_proyecto.activities.ExpenseViewActivity;
 import com.example.pad_proyecto.activities.MainActivity;
 import com.example.pad_proyecto.activities.OpenActivity;
 import com.example.pad_proyecto.data.Expense;
