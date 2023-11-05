@@ -23,14 +23,14 @@ public class NavigationManager {
     }
 
     public void navigateToExpenseView(Context context, Expense expense) {
-        /*if (context != null) {
+        if (context != null) {
             Intent intent = new Intent(context, ExpenseViewActivity.class);
             intent.putExtra("expense", expense);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } else {
             Log.d("TAG","Error al cambiar a la pantalla de ExpenseView");
-        }*/
+        }
     }
     public void navigateToMenuView(Context context) {
         if (context != null) {
