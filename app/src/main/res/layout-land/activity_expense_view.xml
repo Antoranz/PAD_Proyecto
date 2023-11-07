@@ -22,7 +22,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="340dp"
+            android:layout_width="370dp"
+            android:layout_marginStart="30dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -42,6 +43,9 @@
 
                 <TextView
                     android:id="@+id/expenseName"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -63,6 +67,9 @@
 
                 <TextView
                     android:id="@+id/timeDate"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -85,6 +92,9 @@
 
                 <TextView
                     android:id="@+id/spentMoney"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -107,6 +117,9 @@
 
                 <TextView
                     android:id="@+id/paymentMethod"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -131,30 +144,43 @@
                     android:id="@+id/expenseType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Nota:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/noteExpense"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Nota:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/noteExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="59dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="309dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <ImageView
