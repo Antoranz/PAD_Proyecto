@@ -44,7 +44,8 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(adapter);
 
-
+        adapter.setExpenseList(searchExpenses(""));
+        adapter.notifyDataSetChanged();
     }
 
     public LinkedList<Expense> searchExpenses (String query){

@@ -47,7 +47,7 @@ public class Controller {
     public LinkedList<Expense> searchExpense(String s, Context c){
         LinkedList<Expense> expensesList = new LinkedList<>();
         for(Expense e:u.getExpensesList()){
-            if(e.getExpenseName().toLowerCase().contains(s.toLowerCase())){
+            if((" " + e.getExpenseName()).toLowerCase().contains(" "+s.toLowerCase())){
                 expensesList.add(e);
             }
         }
