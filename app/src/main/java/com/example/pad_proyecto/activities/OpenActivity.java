@@ -30,7 +30,7 @@ public class OpenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(u!=null){
-                    viewActivity();
+                    changeActivity();
                 }else{
                     changeUserActivity();
                 }
