@@ -65,7 +65,7 @@ public class SpendResultListAdapter extends RecyclerView.Adapter<SpendResultList
         public ImageButton deleteExpense;
         public View view;
         public Context context;
-
+        public Expense e;
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             view = itemView;
@@ -76,28 +76,26 @@ public class SpendResultListAdapter extends RecyclerView.Adapter<SpendResultList
             viewExpense.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    NavigationManager.getInstance().navigateToEditExpenseView(context);
-
+                    NavigationManager.getInstance().navigateToExpenseView(context,e);
                 }
             });
             editExpense = itemView.findViewById(R.id.editExpense);
             editExpense.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    Intent intent = new Intent(Intent.ACTION_VIEW);  //AAAASDASDASDASDASDSADASDASDASDASDASDASDASD
-                    context.startActivity(intent);
+                    NavigationManager.getInstance().navigateToEditExpenseView(context,e);
                 }
             });;
             deleteExpense = itemView.findViewById(R.id.deleteExpense);
             deleteExpense.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    Intent intent = new Intent(Intent.ACTION_VIEW);  //AAAASDASDASDASDASDSADASDASDASDASDASDASDASD
-                    context.startActivity(intent);
+                    Controller.getInstance().deleteExpense(context,e);
                 }
             });;
         }
         public void bind(Expense b){
+            e=b;
             if(b.getExpenseName().length()>35){
                 expenseName.setText(b.getExpenseName().substring(0,34)+"...");
             }else{

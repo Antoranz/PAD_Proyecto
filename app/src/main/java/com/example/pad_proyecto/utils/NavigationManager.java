@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.pad_proyecto.activities.AddUserActivity;
 import com.example.pad_proyecto.activities.ExpenseViewActivity;
+import com.example.pad_proyecto.activities.ListActivity;
 import com.example.pad_proyecto.activities.MainActivity;
 import com.example.pad_proyecto.activities.OpenActivity;
 import com.example.pad_proyecto.data.Expense;
@@ -43,13 +44,13 @@ public class NavigationManager {
         }
     }
     public void navigateToHistory(Context context) {
-        /*if (context != null) {
-            Intent intent = new Intent(context, HistoryActivity.class);
+        if (context != null) {
+            Intent intent = new Intent(context, ListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } else {
             Log.d("TAG","Error al cambiar a la pantalla del Historial");
-        }*/
+        }
     }
 
     public void navigateToAddUserView(Context context) {
@@ -62,7 +63,7 @@ public class NavigationManager {
         }
     }
 
-    public void navigateToEditExpenseView(Context context){
+    public void navigateToEditExpenseView(Context context, Expense e){
 
     }
 }

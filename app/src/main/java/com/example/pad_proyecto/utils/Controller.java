@@ -56,4 +56,10 @@ public class Controller {
     public User getUser(){
         return u;
     }
+
+    public void deleteExpense(Context c,Expense e) {
+        u.deleteExpense(e);
+        ExpenseDAO dao = DAOImp.getInstance(c);
+        dao.deleteExpense(e.getExpenseId());
+    }
 }
