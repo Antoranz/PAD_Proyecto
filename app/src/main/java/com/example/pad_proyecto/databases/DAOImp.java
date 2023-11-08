@@ -15,8 +15,10 @@ import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
 
 import java.io.File;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
@@ -193,12 +195,11 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
 
     public void addExpense(@NonNull Expense expense) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_ID, expense.getUserId());
         values.put(COLUMN_NAME, expense.getExpenseName());
         values.put(COLUMN_MONEY_SPENT, expense.getMoneySpent());
-        values.put(COLUMN_TIME_DATE, expense.getTimeDate().getTimeInMillis());
+        values.put(COLUMN_TIME_DATE, expense.getTimeDate().getTime());
         values.put(COLUMN_IMAGE_PATH, expense.getImagePath());
         values.put(COLUMN_SPENT_TYPE, expense.getCategory().toString());
         values.put(COLUMN_PAY_METHOD, expense.getPayMethod().toString());
@@ -216,7 +217,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
         values.put(COLUMN_USER_ID, expense.getUserId());
         values.put(COLUMN_NAME, expense.getExpenseName());
         values.put(COLUMN_MONEY_SPENT, expense.getMoneySpent());
-        values.put(COLUMN_TIME_DATE, expense.getTimeDate().getTimeInMillis());
+        values.put(COLUMN_TIME_DATE, expense.getTimeDate().getTime());
         values.put(COLUMN_IMAGE_PATH, expense.getImagePath());
         values.put(COLUMN_SPENT_TYPE, expense.getCategory().toString());
         values.put(COLUMN_PAY_METHOD, expense.getPayMethod().toString());
@@ -250,15 +251,22 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-            Calendar timeDate = Calendar.getInstance();
-            timeDate.setTimeInMillis(timeDateInMillis);
+            // Crea un objeto Instant utilizando el valor long
+            Instant instant = null;
+            Date fecha = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                instant = Instant.ofEpochMilli(timeDateInMillis);
+                // Convierte el Instant a un objeto Date
+               fecha = Date.from(instant);
+
+            }
 
             String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH));
             String expenseType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SPENT_TYPE));
             String payMethod = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PAY_METHOD));
             String note = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTE));
 
-            Expense expense = new Expense(userId,expenseName, moneySpent, timeDate, imagePath, ExpenseType.valueOf(expenseType), PayMethod.valueOf(payMethod), note);
+            Expense expense = new Expense(userId,expenseName, moneySpent, fecha, imagePath, ExpenseType.valueOf(expenseType), PayMethod.valueOf(payMethod), note);
             expense.setId(id);
 
             expenseList.add(expense);
@@ -293,15 +301,22 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-            Calendar timeDate = Calendar.getInstance();
-            timeDate.setTimeInMillis(timeDateInMillis);
+            // Crea un objeto Instant utilizando el valor long
+            Instant instant = null;
+            Date fecha = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                instant = Instant.ofEpochMilli(timeDateInMillis);
+                // Convierte el Instant a un objeto Date
+                fecha = Date.from(instant);
+
+            }
 
             String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH));
             String eType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SPENT_TYPE));
             String payMethod = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PAY_METHOD));
             String note = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTE));
 
-            Expense expense = new Expense(userId, expenseName, moneySpent, timeDate, imagePath, ExpenseType.valueOf(eType), PayMethod.valueOf(payMethod), note);
+            Expense expense = new Expense(userId, expenseName, moneySpent, fecha, imagePath, ExpenseType.valueOf(eType), PayMethod.valueOf(payMethod), note);
             expense.setId(id);
 
             expenseList.add(expense);
@@ -331,15 +346,21 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-            Calendar timeDate = Calendar.getInstance();
-            timeDate.setTimeInMillis(timeDateInMillis);
+            // Crea un objeto Instant utilizando el valor long
+            Instant instant = null;
+            Date fecha = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                instant = Instant.ofEpochMilli(timeDateInMillis);
+                // Convierte el Instant a un objeto Date
+                fecha = Date.from(instant);
 
+            }
             String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH));
             String expenseType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SPENT_TYPE));
             String pMethod = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PAY_METHOD));
             String note = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTE));
 
-            Expense expense = new Expense(userId, expenseName, moneySpent, timeDate, imagePath, ExpenseType.valueOf(expenseType), PayMethod.valueOf(pMethod), note);
+            Expense expense = new Expense(userId, expenseName, moneySpent, fecha, imagePath, ExpenseType.valueOf(expenseType), PayMethod.valueOf(pMethod), note);
             expense.setId(id);
 
             expenseList.add(expense);

@@ -42,6 +42,8 @@ public class OpenActivity extends AppCompatActivity {
         NavigationManager.getInstance().navigateToMenuView(this);
     }
     public void changeUserActivity(){NavigationManager.getInstance().navigateToAddUserView(this);}
-    public void viewActivity(){NavigationManager.getInstance().navigateToExpenseView(this,new Expense(Controller.getInstance().getUser().getId()
-            , "Pan Bimbo", 2.0, Calendar.getInstance(),"81sonOWdkKL.jpg", ExpenseType.Alimentacion, PayMethod.Efectivo,"Este pan esta blando"));}
 }
+
+//    public void viewActivity(){NavigationManager.getInstance().navigateToExpenseView(this,new Expense(Controller.getInstance().getUser().getId()
+  //          , "Pan Bimbo", 2.0, Calendar.getInstance(),"81sonOWdkKL.jpg", ExpenseType.Alimentacion, PayMethod.Efectivo,"Este pan esta blando"));}
+//}

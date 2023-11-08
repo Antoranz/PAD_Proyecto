@@ -5,7 +5,7 @@ import com.example.pad_proyecto.enums.PayMethod;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 
 public class Expense implements Serializable {
 
@@ -13,13 +13,13 @@ public class Expense implements Serializable {
     private long userId;
     private String expenseName;
     private Double moneySpent;
-    private Calendar timeDate;
+    private Date timeDate;
     private String imagePath;
     private ExpenseType category;
     private PayMethod payMethod;
     private String note;
 
-    public Expense(long ui, String e, Double m, Calendar d, String path, ExpenseType c, PayMethod p, String n) {
+    public Expense(long ui, String e, Double m, Date d, String path, ExpenseType c, PayMethod p, String n) {
         expenseName = e;
         moneySpent = m;
         timeDate = d;
@@ -54,12 +54,12 @@ public class Expense implements Serializable {
         return moneySpent;
     }
 
-    public Calendar getTimeDate() {
+    public Date getTimeDate() {
         return timeDate;
     }
 
     public String writeDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(timeDate.getTime());
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.pad_proyecto.activities.AddExpenseActivity;
 import com.example.pad_proyecto.activities.AddUserActivity;
 import com.example.pad_proyecto.activities.ExpenseViewActivity;
 import com.example.pad_proyecto.activities.ListActivity;
@@ -50,6 +51,15 @@ public class NavigationManager {
             context.startActivity(intent);
         } else {
             Log.d("TAG","Error al cambiar a la pantalla del Historial");
+        }
+    }
+    public void navigateToAddExpense(Context context) {
+        if (context != null) {
+            Intent intent = new Intent(context, AddExpenseActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } else {
+            Log.d("TAG","Error al cambiar a la pantalla del Añadir gasto");
         }
     }
 

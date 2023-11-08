@@ -21,6 +21,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     Button historyButton;
+    Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         historyButton = findViewById(R.id.historyButton);
         historyButton.setOnClickListener(v -> {
             NavigationManager.getInstance().navigateToHistory(this);
+        });
+        addButton = findViewById(R.id.addExpenseButton);
+        addButton.setOnClickListener(v -> {
+            NavigationManager.getInstance().navigateToAddExpense(this);
         });
     }
 
