@@ -72,8 +72,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                 expenseName.getText().toString(),
                 expenseDate.getText().toString(),
                 moneySpent.getText().toString(),
-                (String) categorySpinner.getSelectedItem(),
                 (String) PayMethodSpinner.getSelectedItem(),
+                (String) categorySpinner.getSelectedItem(),
                 noteText.getText().toString()
         ));
 
