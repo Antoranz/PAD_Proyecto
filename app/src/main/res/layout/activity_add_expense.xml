@@ -100,12 +100,6 @@
                     android:layout_height="210dp"
                     app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
             </LinearLayout>
 
             <Button
