@@ -60,6 +60,17 @@ public class User implements Serializable {
         expenseList.remove(e);
     }
 
+    public void editExpense(Expense e, Expense eActualizado) {
+        totalMoneySpent -= e.getMoneySpent();
+        totalMoneySpent += eActualizado.getMoneySpent();
+        for (Expense eAux:expenseList ) {
+            if(eAux.getExpenseId() == e.getExpenseId()){
+                eAux.update(eActualizado);
+            }
+        }
+        e.update(eActualizado);
+    }
+
     public void reset() {
         totalMoneySpent = 0.0;
         budget = 0.0;

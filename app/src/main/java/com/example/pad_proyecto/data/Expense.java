@@ -72,5 +72,15 @@ public class Expense implements Serializable {
     }
 
     public long getUserId() {return userId;}
+
+    public void update(Expense eActualizado) {
+        this.expenseName = eActualizado.getExpenseName();
+        this.moneySpent = eActualizado.getMoneySpent();
+        this.timeDate = eActualizado.getTimeDate();
+        this.imagePath = eActualizado.getImagePath();
+        this.category = eActualizado.getCategory();
+        this.payMethod = eActualizado.getPayMethod();
+        this.note = eActualizado.getNote();
+    }
 }
 

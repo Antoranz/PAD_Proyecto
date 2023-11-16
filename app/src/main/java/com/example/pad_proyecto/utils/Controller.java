@@ -62,4 +62,10 @@ public class Controller {
         ExpenseDAO dao = DAOImp.getInstance(c);
         dao.deleteExpense(e.getExpenseId());
     }
+
+    public void editExpense(Context c,Expense e , Expense eActualizado) {
+        u.editExpense(e, eActualizado);
+        ExpenseDAO dao = DAOImp.getInstance(c);
+        dao.updateExpense(e);
+    }
 }

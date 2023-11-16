@@ -71,9 +71,20 @@ public class ExpenseViewActivity extends AppCompatActivity {
                         .load(imgUri)
                         .into(img);
 
+
+
+
             }
 
         }
+
+        img.setOnClickListener(v -> {
+            if(imagen!=null){
+                NavigationManager.getInstance().navigateToFullScreenView(this,imagen);
+            }
+
+        });
+
 
 
 

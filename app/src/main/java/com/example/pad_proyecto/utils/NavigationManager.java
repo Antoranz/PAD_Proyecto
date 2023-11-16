@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.example.pad_proyecto.activities.AddExpenseActivity;
 import com.example.pad_proyecto.activities.AddUserActivity;
+import com.example.pad_proyecto.activities.EditExpenseActivity;
 import com.example.pad_proyecto.activities.ExpenseViewActivity;
+import com.example.pad_proyecto.activities.FullScreenActivity;
 import com.example.pad_proyecto.activities.ListActivity;
 import com.example.pad_proyecto.activities.MainActivity;
 import com.example.pad_proyecto.activities.OpenActivity;
@@ -74,6 +76,28 @@ public class NavigationManager {
     }
 
     public void navigateToEditExpenseView(Context context, Expense e){
+
+        if (context != null) {
+            Intent intent = new Intent(context, EditExpenseActivity.class);
+            intent.putExtra("expense", e);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } else {
+            Log.d("TAG","Error al cambiar a la pantalla de AddUser");
+        }
+
+    }
+
+    public void navigateToFullScreenView(Context context,String imgPath){
+
+        if (context != null) {
+            Intent intent = new Intent(context, FullScreenActivity.class);
+            intent.putExtra("path", imgPath);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } else {
+            Log.d("TAG","Error al cambiar a la pantalla de AddUser");
+        }
 
     }
 }
