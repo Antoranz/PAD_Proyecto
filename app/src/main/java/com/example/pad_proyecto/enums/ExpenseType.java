@@ -1,6 +1,7 @@
 package com.example.pad_proyecto.enums;
 
 public enum ExpenseType {
+
     Alimentacion,
     Transporte,
     Alojamiento,
@@ -12,4 +13,5 @@ public enum ExpenseType {
     Viajes,
     Donaciones,
     Otros
+
 }

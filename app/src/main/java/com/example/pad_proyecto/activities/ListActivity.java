@@ -7,6 +7,9 @@ import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,9 +18,12 @@ import android.view.View;
 
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
+import com.example.pad_proyecto.enums.ExpenseType;
+import com.example.pad_proyecto.enums.PayMethod;
 import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.SpendResultListAdapter;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,7 +31,9 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
     private static final int BOOK_LOADER_ID = 1;
     private SpendResultListAdapter adapter;
 
+    private Spinner s1Categoria;
 
+    private Spinner s2MetodoPago;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,22 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_list_expenses);
 
         RecyclerView rv = findViewById(R.id.recyclerView);
+
+        s1Categoria = findViewById(R.id.spinner1);
+        s2MetodoPago = findViewById(R.id.spinner2);
+
+        ArrayList<String> listaValoresCategoria = new ArrayList<>();
+        listaValoresCategoria.add("Todos");
+        for(ExpenseType e : ExpenseType.values())
+            listaValoresCategoria.add(e.toString());
+
+        ArrayList<String> listaValoresMetodoPago = new ArrayList<>();
+        listaValoresMetodoPago.add("Todos");
+        for(PayMethod p : PayMethod.values())
+            listaValoresMetodoPago.add(p.toString());
+
+        s1Categoria.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaValoresCategoria));
+        s2MetodoPago.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaValoresMetodoPago));
 
         SearchView sv = findViewById(R.id.searchView);
 
@@ -49,7 +73,7 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     public LinkedList<Expense> searchExpenses (String query){
-        return Controller.getInstance().searchExpense(query, this);
+        return Controller.getInstance().searchExpense(query, this, s1Categoria.getSelectedItem().toString(), s2MetodoPago.getSelectedItem().toString());
     }
 
     @Override
@@ -65,5 +89,7 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
         adapter.notifyDataSetChanged();
         return true;
     }
+
+
 }
 

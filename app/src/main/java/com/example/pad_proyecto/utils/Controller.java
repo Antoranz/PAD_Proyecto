@@ -7,6 +7,8 @@ import com.example.pad_proyecto.data.User;
 import com.example.pad_proyecto.databases.DAOImp;
 import com.example.pad_proyecto.databases.ExpenseDAO;
 import com.example.pad_proyecto.databases.UserDAO;
+import com.example.pad_proyecto.enums.ExpenseType;
+import com.example.pad_proyecto.enums.PayMethod;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -44,10 +46,10 @@ public class Controller {
         }
 
     }
-    public LinkedList<Expense> searchExpense(String s, Context c){
+    public LinkedList<Expense> searchExpense(String s, Context c, String et, String pm){
         LinkedList<Expense> expensesList = new LinkedList<>();
         for(Expense e:u.getExpensesList()){
-            if((" " + e.getExpenseName()).toLowerCase().contains(" "+s.toLowerCase())){
+            if((" " + e.getExpenseName()).toLowerCase().contains(" "+s.toLowerCase()) && (et.equals("Todos") || e.getCategory().toString().equals(et)) && (pm.equals("Todos") || e.getPayMethod().toString().equals(pm))){
                 expensesList.add(e);
             }
         }
