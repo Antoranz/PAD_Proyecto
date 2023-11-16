@@ -22,7 +22,7 @@
         <activity android:name=".activities.EditExpenseActivity" android:exported="true"> </activity>
         <activity android:name=".activities.AddExpenseActivity" android:exported="true"> </activity>
         <activity android:name=".activities.AddUserActivity" android:exported="true"> </activity>
-        <activity android:name=".activities.ListActivity" android:exported="true"> </activity>
+        <activity android:name=".activities.ListActivity" android:exported="true" android:windowSoftInputMode="adjustPan"> </activity>
         <activity android:name=".activities.ExpenseViewActivity" android:exported="true"> </activity>
         <activity android:name=".activities.OpenActivity" android:exported="true" >
             <intent-filter>
