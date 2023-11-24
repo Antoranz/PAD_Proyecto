@@ -20,8 +20,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button historyButton;
-    Button addButton;
+    Button historyButton, addButton, exportButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.addExpenseButton);
         addButton.setOnClickListener(v -> {
             NavigationManager.getInstance().navigateToAddExpense(this);
+        });
+
+        exportButton = findViewById(R.id.buttonExport);
+        exportButton.setOnClickListener(v -> {
+            NavigationManager.getInstance().navigateToExportView(this);
         });
     }
 

@@ -8,6 +8,7 @@ import com.example.pad_proyecto.activities.AddExpenseActivity;
 import com.example.pad_proyecto.activities.AddUserActivity;
 import com.example.pad_proyecto.activities.EditExpenseActivity;
 import com.example.pad_proyecto.activities.ExpenseViewActivity;
+import com.example.pad_proyecto.activities.ExportExpenseActivity;
 import com.example.pad_proyecto.activities.FullScreenActivity;
 import com.example.pad_proyecto.activities.ListActivity;
 import com.example.pad_proyecto.activities.MainActivity;
@@ -53,6 +54,16 @@ public class NavigationManager {
             context.startActivity(intent);
         } else {
             Log.d("TAG","Error al cambiar a la pantalla del Historial");
+        }
+    }
+
+    public void navigateToExportView(Context context) {
+        if (context != null) {
+            Intent intent = new Intent(context, ExportExpenseActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } else {
+            Log.d("TAG","Error al cambiar a la pantalla de Export");
         }
     }
     public void navigateToAddExpense(Context context) {
