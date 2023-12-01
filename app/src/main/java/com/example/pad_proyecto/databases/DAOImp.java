@@ -19,6 +19,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
@@ -236,8 +237,8 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
 
         db.close();
     }
-    public List<Expense> getAllExpenses(long uId) {
-        List<Expense> expenseList = new ArrayList<>();
+    public LinkedList<Expense> getAllExpenses(long uId) {
+        LinkedList<Expense> expenseList = new LinkedList<Expense>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         String selectQuery = "SELECT * FROM " + TABLE_EXPENSE +" WHERE (" + COLUMN_USER_ID+" = "+uId+");";

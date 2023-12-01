@@ -64,10 +64,21 @@ public class Controller {
         ExpenseDAO dao = DAOImp.getInstance(c);
         dao.deleteExpense(e.getExpenseId());
     }
-
+    public LinkedList<Expense> getAllExpenses(Context c) {
+        ExpenseDAO dao = DAOImp.getInstance(c);
+        return dao.getAllExpenses(u.getId());
+    }
     public void editExpense(Context c,Expense e , Expense eActualizado) {
         u.editExpense(e, eActualizado);
         ExpenseDAO dao = DAOImp.getInstance(c);
         dao.updateExpense(e);
     }
+    public void deleteExpenses(Context context, LinkedList<Expense> expenses) {
+        u.deleteExpenses(expenses);
+        ExpenseDAO dao = DAOImp.getInstance(context);
+        for(Expense e : expenses){
+        dao.deleteExpense(e.getExpenseId());
+        }
+    }
 }
+

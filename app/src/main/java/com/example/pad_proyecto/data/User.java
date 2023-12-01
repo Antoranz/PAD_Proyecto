@@ -2,6 +2,7 @@ package com.example.pad_proyecto.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class User implements Serializable {
@@ -58,6 +59,12 @@ public class User implements Serializable {
     public void deleteExpense(Expense e) {
         totalMoneySpent -= e.getMoneySpent();
         expenseList.remove(e);
+    }
+    public void deleteExpenses(LinkedList<Expense> e) {
+        for(int i=0;i<e.size();i++){
+            totalMoneySpent -= e.get(i).getMoneySpent();
+            expenseList.remove(e);
+        }
     }
 
     public void editExpense(Expense e, Expense eActualizado) {
