@@ -41,14 +41,11 @@ public class DeleteExpenseActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.deleteButton);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinkedList<Expense> selectedExpenses = adapter.getSelectedExpenses();
-                Controller.getInstance().deleteExpenses(DeleteExpenseActivity.this, selectedExpenses);
-                adapter.notifyDataSetChanged();
-                NavigationManager.getInstance().navigateToDeleteExpense(v.getContext());
-            }
+        button.setOnClickListener(v -> {
+            LinkedList<Expense> selectedExpenses = adapter.getSelectedExpenses();
+            Controller.getInstance().deleteExpenses(DeleteExpenseActivity.this, selectedExpenses);
+            adapter.notifyDataSetChanged();
+            NavigationManager.getInstance().navigateToDeleteExpense(v.getContext());
         });
     }
 }

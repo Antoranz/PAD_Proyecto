@@ -25,10 +25,9 @@
         android:text="Añadir Gasto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/historyButton"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.136" />
 
     <Button
         android:id="@+id/deleteExpenseButton"
@@ -41,10 +40,10 @@
         android:text="ELIMINAR GASTO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addExpenseButton"
-        app:layout_constraintVertical_bias="0.229" />
+        app:layout_constraintVertical_bias="0.375" />
 
     <Button
         android:id="@+id/buttonExport"
@@ -53,6 +52,17 @@
         android:layout_marginTop="36dp"
         android:text="EXPORTAR GASTOS"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStatistics" />
+
+    <Button
+        android:id="@+id/buttonStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Ver estadisticas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deleteExpenseButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

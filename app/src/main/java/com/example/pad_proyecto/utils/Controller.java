@@ -1,6 +1,7 @@
 package com.example.pad_proyecto.utils;
 
 import android.content.Context;
+import android.util.Pair;
 
 import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.data.User;
@@ -72,6 +73,32 @@ public class Controller {
         u.editExpense(e, eActualizado);
         ExpenseDAO dao = DAOImp.getInstance(c);
         dao.updateExpense(e);
+    }
+
+    public List<Pair<String,Double>> showCategoryStatistics(Context c){
+        List<Pair<String,Double>> list = new ArrayList<>();
+        ExpenseDAO dao = DAOImp.getInstance(c);
+        for(ExpenseType type: ExpenseType.values()){
+            double suma = 0.0;
+            for(Expense e : dao.getExpensesByExpenseType(type)){
+                suma += e.getMoneySpent();
+            }
+            list.add(new Pair(type.toString(),suma));
+        }
+        return list;
+    }
+
+    public List<Pair<String,Double>> showPayMethodStatistics(Context c){
+        List<Pair<String,Double>> list = new ArrayList<>();
+        ExpenseDAO dao = DAOImp.getInstance(c);
+        for(PayMethod type: PayMethod.values()){
+            double suma = 0.0;
+            for(Expense e : dao.getExpensesByPayMethod(type)){
+                suma += e.getMoneySpent();
+            }
+            list.add(new Pair(type.toString(),suma));
+        }
+        return list;
     }
     public void deleteExpenses(Context context, LinkedList<Expense> expenses) {
         u.deleteExpenses(expenses);
