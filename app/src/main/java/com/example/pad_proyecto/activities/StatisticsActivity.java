@@ -32,6 +32,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private PieChart pieChart;
     private Spinner spinner;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class StatisticsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistics_view);
         pieChart = findViewById(R.id.pieChart);
         spinner = findViewById(R.id.SpinnerStatistics);
+        textView = findViewById(R.id.InformacionAdicional);
 
         // Configura opciones del Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -122,7 +124,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
         // Muestra el mensaje en el TextView adicional
-        TextView textView = findViewById(R.id.InformacionAdicional);
+
         textView.setText(Html.fromHtml(mensaje));
 
         textView.setTextSize(18); // Tamaño del texto más grande
@@ -158,6 +160,12 @@ public class StatisticsActivity extends AppCompatActivity {
         dataSet.setValueTextSize(20f); // Establece el tamaño del texto de los valores
         // ... Configuración adicional del gráfico
         actualizarGrafico(dataSet,centerText,textSize);
+
+        // Hacer visible el TextView
+        textView.setVisibility(View.GONE);
+
+        // Ocultar el gráfico (si es necesario)
+        pieChart.setVisibility(View.VISIBLE);
     }
 
 
@@ -193,6 +201,11 @@ public class StatisticsActivity extends AppCompatActivity {
         dataSet.setValueTextSize(20f); // Establece el tamaño del texto de los valores
         // ... Configuración adicional del gráfico
         actualizarGrafico(dataSet,centerText,textSize);
+
+        textView.setVisibility(View.GONE);
+
+        // Ocultar el gráfico (si es necesario)
+        pieChart.setVisibility(View.VISIBLE);
     }
 
     private void actualizarGrafico(PieDataSet dataSet,String centerText,float textSize) {
