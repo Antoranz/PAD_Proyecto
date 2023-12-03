@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">SpendWise</string>
     <string name="addExpenseText">Añadir Gasto</string>
+    <string-array name="chart_types">
+        <item>Por categorías</item>
+        <item>Por tipo de pago</item>
+        <item>Informacion General</item>
+        <!-- Puedes agregar más opciones según tus necesidades -->
+    </string-array>
 </resources>

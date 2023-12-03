@@ -68,6 +68,8 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(adapter);
 
+
+
         adapter.setExpenseList(Controller.getInstance().getAllExpenses(this));
         adapter.notifyDataSetChanged();
     }
