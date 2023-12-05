@@ -17,11 +17,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.utils.Controller;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -33,6 +41,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private PieChart pieChart;
     private Spinner spinner;
     private TextView textView;
+    private BarChart barChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,7 @@ public class StatisticsActivity extends AppCompatActivity {
         pieChart = findViewById(R.id.pieChart);
         spinner = findViewById(R.id.SpinnerStatistics);
         textView = findViewById(R.id.InformacionAdicional);
+        barChart = findViewById(R.id.barChart);
 
         // Configura opciones del Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -82,10 +92,84 @@ public class StatisticsActivity extends AppCompatActivity {
             case "Por tipo de pago":
                 configurarGraficoPorTipodepago();
                 break;
+            case "Dinero Gastado por Mes":
+                configurarGraficoPorMes();
+                break;
             case "Informacion General":
                 configurarInformacionGeneral();
                 break;
             // Puedes agregar más casos según tus necesidades
+        }
+    }
+
+    private void configurarGraficoPorMes() {
+
+
+        List<BarEntry> barEntries = Controller.getInstance().getMonthlyBarChartData();  // Implementa este método según tus necesidades
+
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Dinero Gastado por Mes en 2023");
+        BarData barData = new BarData(barDataSet);
+
+
+        barDataSet.setValueTextSize(12f);
+        barChart.setData(barData);
+
+        // Configuración adicional del gráfico de barras
+        barChart.getDescription().setEnabled(false);
+        barChart.animateY(1000);
+
+        // Configura el eje X
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new MyXAxisValueFormatter());  // Implementa esta clase según tus necesidades
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Cambia la posición del eje X
+        xAxis.setGranularity(1f);
+        xAxis.setTextSize(11f);
+
+
+        // Configura el eje Y
+        YAxis yAxisRight = barChart.getAxisRight();
+        yAxisRight.setEnabled(false);  // Desactiva el eje Y derecho si no lo necesitas
+        YAxis yAxis = barChart.getAxisLeft();
+        yAxis.setTextSize(15f);
+
+        barChart.setExtraBottomOffset(20f); // Espacio adicional en la parte inferior
+        barChart.setExtraLeftOffset(20f);   // Espacio adicional en el lado izquierdo
+
+        barChart.setTouchEnabled(false);  // Desactiva la interacción táctil (zoom y pan)
+        barChart.setScaleEnabled(false);  // Desactiva el escalado (zoom)
+        barChart.setPinchZoom(false);
+
+        barData.setBarWidth(0.5f);
+        barChart.setExtraTopOffset(10f);
+
+
+        Legend legend = barChart.getLegend();
+        legend.setTextSize(12f);  // Establece el tamaño del texto de la leyenda
+
+        textView.setVisibility(View.GONE);
+
+        barChart.setVisibility(View.VISIBLE);
+
+        // Ocultar el gráfico (si es necesario)
+        pieChart.setVisibility(View.GONE);
+
+    }
+
+    private class MyXAxisValueFormatter extends ValueFormatter {
+        @Override
+        public String getAxisLabel(float value, AxisBase axis) {
+            // Retorna la etiqueta para cada valor en el eje X (suponiendo que los valores son números de mes)
+            // Puedes personalizar esto según tus necesidades
+            int month = (int) value;
+            return obtenerNombreMes(month);
+        }
+
+        // Implementa esta función para obtener el nombre del mes según su número (1 para enero, 2 para febrero, etc.)
+        private String obtenerNombreMes(int month) {
+            // Implementa lógica para obtener el nombre del mes según su número
+            // Puedes usar un array de strings, un switch, o cualquier otra lógica que prefieras
+            String[] nombresMeses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+            return nombresMeses[month - 1];
         }
     }
 
@@ -114,12 +198,15 @@ public class StatisticsActivity extends AppCompatActivity {
         builder.delete(builder.length() - 2, builder.length());
 
         categoriesText = builder.toString();
+        String yearTitle = "<font color='#000000'><big>Año: </big></font><font color='#000000'><big>2023</big></font><br/>";
 
-        String mensaje = "<font color='#000000'>Mayor gasto: </font> <br/>" +
+
+
+        String mensaje = yearTitle + "<font color='#000000'>Mayor gasto: </font> <br/>" +
                 "<font color='#808080'>" + Controller.getInstance().getHighestExpense() + "</font>" +
                 "<br/>" +
-                "<font color='#000000'>Año con más gastos: </font> <br/>" +
-                "<font color='#808080'>" + Controller.getInstance().getYearWithMostExpenses() + "</font>" +
+                "<font color='#000000'>Mes con más gastos: </font> <br/>" +
+                "<font color='#808080'>" + Controller.getInstance().getMonthWithMostExpenses() + "</font>" +
                 "<br/>"+ categoriesText + "<br/>" + paymethodsText;
 
 
@@ -133,11 +220,14 @@ public class StatisticsActivity extends AppCompatActivity {
 
         // Hacer visible el TextView
         textView.setVisibility(View.VISIBLE);
+        barChart.setVisibility(View.GONE);
 
         // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.GONE);
 
     }
+
+
 
 
 
@@ -164,6 +254,7 @@ public class StatisticsActivity extends AppCompatActivity {
         // Hacer visible el TextView
         textView.setVisibility(View.GONE);
 
+        barChart.setVisibility(View.GONE);
         // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.VISIBLE);
     }
@@ -203,6 +294,8 @@ public class StatisticsActivity extends AppCompatActivity {
         actualizarGrafico(dataSet,centerText,textSize);
 
         textView.setVisibility(View.GONE);
+
+        barChart.setVisibility(View.GONE);
 
         // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.VISIBLE);

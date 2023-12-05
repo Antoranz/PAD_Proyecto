@@ -16,15 +16,9 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
-            android:layout_height="482dp"
-            android:layout_marginBottom="10dp" />
 
-        <Spinner
-            android:id="@+id/SpinnerStatistics"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="16dp"
-            android:text="Cambiar gráfico" />
+            android:layout_height="508dp"
+            android:layout_marginBottom="10dp" />
 
         <!-- Añade el TextView adicional y configúralo según tus necesidades -->
         <TextView
@@ -36,6 +30,20 @@
             android:text=""
             android:textSize="16sp"
             android:lineSpacingExtra="10dp"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="525dp"
+            android:layout_marginTop="16dp" />
+
+        <Spinner
+            android:id="@+id/SpinnerStatistics"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="16dp"
+            android:text="Cambiar gráfico" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
