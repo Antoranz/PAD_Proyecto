@@ -1,7 +1,9 @@
 package com.example.pad_proyecto.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +11,12 @@ import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.ExcelExporter;
+import com.example.pad_proyecto.utils.JsonExporter;
+import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -22,6 +29,9 @@ public class ExportExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_export);
         jsonButton = findViewById(R.id.jsonButton);
         jsonButton.setOnClickListener(v -> {
+            List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
+            JsonExporter.exportExpensesToJson(this, expenses, "expenses.json");
+
 
         });
         excelButton = findViewById(R.id.xlsxButton);
