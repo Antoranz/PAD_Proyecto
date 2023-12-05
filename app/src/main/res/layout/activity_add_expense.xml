@@ -97,7 +97,7 @@
                 <ImageView
                     android:id="@+id/galleryImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp"
+                    android:layout_height="185dp"
                     app:srcCompat="@android:drawable/ic_menu_gallery" />
 
             </LinearLayout>

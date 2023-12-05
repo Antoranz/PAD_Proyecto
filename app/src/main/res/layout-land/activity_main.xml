@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="276dp"
-        android:layout_height="168dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/imageView4"
+        android:layout_width="235dp"
+        android:layout_height="229dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_channel_foreground" />
@@ -20,63 +20,60 @@
         android:id="@+id/historyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:backgroundTint="?attr/colorPrimaryVariant"
         android:text="HistoryButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
 
     <Button
         android:id="@+id/addExpenseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginEnd="132dp"
+        android:layout_width="171dp"
+        android:layout_height="50dp"
         android:text="Añadir Gasto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.878"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyButton"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.174" />
 
     <Button
         android:id="@+id/deleteExpenseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="305dp"
         android:text="ELIMINAR GASTO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addExpenseButton"
-        app:layout_constraintVertical_bias="0.887" />
+        app:layout_constraintTop_toBottomOf="@+id/historyButton"
+        app:layout_constraintVertical_bias="0.402" />
 
     <Button
         android:id="@+id/buttonExport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="EXPORTAR GASTOS"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStatistics" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.943" />
 
     <Button
         android:id="@+id/buttonStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
         android:text="Ver estadisticas"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteExpenseButton" />
+        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintStart_toEndOf="@+id/deleteExpenseButton"
+        app:layout_constraintTop_toBottomOf="@+id/addExpenseButton"
+        app:layout_constraintVertical_bias="0.398" />
 </androidx.constraintlayout.widget.ConstraintLayout>

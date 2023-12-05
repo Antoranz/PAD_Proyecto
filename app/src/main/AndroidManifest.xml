@@ -23,6 +23,7 @@
         <activity android:name=".activities.EditExpenseActivity" android:exported="true" android:parentActivityName=".activities.ListActivity"> </activity>
         <activity android:name=".activities.AddExpenseActivity" android:exported="true" android:parentActivityName=".activities.MainActivity"> </activity>
         <activity android:name=".activities.AddUserActivity" android:exported="true"> </activity>
+        <activity android:name=".activities.ExportExpenseActivity" android:exported="true" android:parentActivityName=".activities.MainActivity"> </activity>
         <activity android:name=".activities.StatisticsActivity" android:exported="true" android:parentActivityName=".activities.MainActivity"> </activity>
         <activity android:name=".activities.ListActivity" android:exported="true" android:windowSoftInputMode="adjustPan" android:parentActivityName=".activities.MainActivity"> </activity>
         <activity android:name=".activities.ExpenseViewActivity" android:exported="true" android:parentActivityName=".activities.ListActivity"> </activity>

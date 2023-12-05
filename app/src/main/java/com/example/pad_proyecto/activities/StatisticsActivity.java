@@ -124,6 +124,7 @@ public class StatisticsActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Cambia la posición del eje X
         xAxis.setGranularity(1f);
         xAxis.setTextSize(11f);
+        xAxis.setLabelCount(12);
 
 
         // Configura el eje Y
@@ -134,7 +135,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         barChart.setExtraBottomOffset(20f); // Espacio adicional en la parte inferior
         barChart.setExtraLeftOffset(20f);   // Espacio adicional en el lado izquierdo
-
+        barChart.getAxisLeft().setGridColor(Color.BLACK);
         barChart.setTouchEnabled(false);  // Desactiva la interacción táctil (zoom y pan)
         barChart.setScaleEnabled(false);  // Desactiva el escalado (zoom)
         barChart.setPinchZoom(false);
@@ -168,7 +169,8 @@ public class StatisticsActivity extends AppCompatActivity {
         private String obtenerNombreMes(int month) {
             // Implementa lógica para obtener el nombre del mes según su número
             // Puedes usar un array de strings, un switch, o cualquier otra lógica que prefieras
-            String[] nombresMeses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+            String[] nombresMeses = {"E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"};
+
             return nombresMeses[month - 1];
         }
     }
