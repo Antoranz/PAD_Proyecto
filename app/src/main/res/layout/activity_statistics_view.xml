@@ -13,10 +13,18 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
+        <Spinner
+            android:id="@+id/EscribirAño"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="16dp"
+            android:lineSpacingExtra="10dp"
+            android:text="Establece el año que quieras analizar "
+            android:textSize="16sp" />
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
-
             android:layout_height="508dp"
             android:layout_marginBottom="10dp" />
 
@@ -29,7 +37,8 @@
             android:layout_marginTop="16dp"
             android:text=""
             android:textSize="16sp"
-            android:lineSpacingExtra="10dp"/>
+            android:lineSpacingExtra="10dp"
+            android:tint="?attr/colorPrimary"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
@@ -38,12 +47,85 @@
             android:layout_height="525dp"
             android:layout_marginTop="16dp" />
 
+        <TextView
+            android:id="@+id/TextInfo1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="20sp"
+            android:text="Mayor gasto:"
+            android:visibility="gone"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/TextInfoA1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:textSize="18sp"
+            android:textColor="?attr/colorSecondaryVariant" />
+
+        <TextView
+            android:id="@+id/TextInfo2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="Mes con más gastos: "
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/TextInfoA2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:textSize="18sp"
+
+            android:textColor="?attr/colorSecondaryVariant" />
+        <TextView
+            android:id="@+id/TextInfo3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="Categoría/s más utilizada/s:"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/TextInfoA3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:textSize="18sp"
+
+            android:textColor="?attr/colorSecondaryVariant" />
+        <TextView
+            android:id="@+id/TextInfo4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:text="Tipo de pago más utilizado: "
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/TextInfoA4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:textSize="18sp"
+
+            android:textColor="?attr/colorSecondaryVariant" />
+
         <Spinner
             android:id="@+id/SpinnerStatistics"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginTop="16dp"
-            android:text="Cambiar gráfico" />
+            android:text="Cambiar gráfico"
+            android:tint="?attr/colorPrimary"/>
+
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

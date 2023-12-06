@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:backgroundTint="?attr/colorOnPrimary">
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/colorOnPrimary"
             android:src="@android:drawable/ic_menu_view"
-            android:tint="?attr/colorPrimary" />
+            app:tint="?attr/colorPrimary" />
 
         <ImageButton
             android:id="@+id/editExpense"
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/colorOnPrimary"
             android:src="@android:drawable/ic_menu_edit"
-            android:tint="?attr/colorSecondaryVariant" />
+            app:tint="?attr/colorSecondaryVariant" />
 
         <ImageButton
             android:id="@+id/deleteExpense"
@@ -56,7 +57,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/colorOnPrimary"
             android:src="@android:drawable/ic_menu_delete"
-            android:tint="@color/red" />
+            app:tint="@color/red" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

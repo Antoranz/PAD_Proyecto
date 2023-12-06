@@ -12,14 +12,18 @@ import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
 import com.github.mikephil.charting.data.BarEntry;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.ListDocument;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Controller {
     private User u;
@@ -87,7 +91,7 @@ public class Controller {
         dao.updateExpense(e);
     }
 
-    public List<Pair<String, Double>> showCategoryStatistics(Context c) {
+    public List<Pair<String, Double>> showCategoryStatistics(Context c,String añoEstablecido) {
         List<Pair<String, Double>> list = new ArrayList<>();
         ExpenseDAO dao = DAOImp.getInstance(c);
         for (ExpenseType type : ExpenseType.values()) {
@@ -98,7 +102,7 @@ public class Controller {
                 int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
 
                 // Verifica si el gasto es del año 2023
-                if (expenseYear == 2023) {
+                if (expenseYear == Integer.parseInt(añoEstablecido)) {
                     suma += e.getMoneySpent();
                 }
             }
@@ -107,7 +111,7 @@ public class Controller {
         return list;
     }
 
-    public List<Pair<String, Double>> showPayMethodStatistics(Context c) {
+    public List<Pair<String, Double>> showPayMethodStatistics(Context c,String añoEstablecido) {
         List<Pair<String, Double>> list = new ArrayList<>();
         ExpenseDAO dao = DAOImp.getInstance(c);
         for (PayMethod type : PayMethod.values()) {
@@ -117,7 +121,7 @@ public class Controller {
                 int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
 
                 // Verifica si el gasto es del año 2023
-                if (expenseYear == 2023) {
+                if (expenseYear == Integer.parseInt(añoEstablecido)) {
                     suma += e.getMoneySpent();
                 }
             }
@@ -125,6 +129,7 @@ public class Controller {
         }
         return list;
     }
+
 
     public void deleteExpenses(Context context, LinkedList<Expense> expenses) {
         u.deleteExpenses(expenses);
@@ -134,12 +139,12 @@ public class Controller {
         }
     }
 
-    public String getHighestExpense() {
+    public String getHighestExpense(Context c, String añoEstablecido) {
 
         Double maxSum = Double.MIN_VALUE;  // Inicializa con el valor mínimo posible
         String maxExpenseName = null;
 
-        for (Expense e : u.getExpensesList()) {
+        for (Expense e : getAllExpenses(c)) {
             Double currentSum = e.getMoneySpent();
             String currentExpenseName = e.getExpenseName();
 
@@ -148,7 +153,7 @@ public class Controller {
             int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
 
             // Verifica si el gasto es del año 2023
-            if (expenseYear == 2023) {
+            if (expenseYear == Integer.parseInt(añoEstablecido)) {
 
                 if (currentSum > maxSum) {
                     maxSum = currentSum;
@@ -160,7 +165,7 @@ public class Controller {
         return maxExpenseName;
     }
 
-    public List<String> getMostUsedPaymentMethod(Context c) {
+    public List<String> getMostUsedPaymentMethod(Context c,String añoEstablecido) {
         ExpenseDAO dao = DAOImp.getInstance(c);
         int maxSum = 0;
         List<String> mostUsedPaymentMethod = new ArrayList<>();
@@ -172,7 +177,7 @@ public class Controller {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
                 int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
                 // Verifica si el gasto es del año 2023
-                if (expenseYear == 2023) {
+                if (expenseYear == Integer.parseInt(añoEstablecido)) {
 
                     sum += 1;
                 }
@@ -192,7 +197,7 @@ public class Controller {
 
     // Función auxiliar para verificar si el gasto está en un año específico
 
-    public List<String> getMostUsedCategories(Context c) {
+    public List<String> getMostUsedCategories(Context c,String añoEstablecido) {
 
         ExpenseDAO dao = DAOImp.getInstance(c);
         int maxSum = 0;
@@ -206,7 +211,7 @@ public class Controller {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
                 int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
                 // Verifica si el gasto es del año 2023
-                if (expenseYear == 2023) {
+                if (expenseYear == Integer.parseInt(añoEstablecido)) {
 
                     sum += 1;
                 }
@@ -225,19 +230,19 @@ public class Controller {
     }
 
 
-    public String getMonthWithMostExpenses() {
+    public String getMonthWithMostExpenses(Context c,String añoEstablecido) {
 
         Double maxSum = Double.MIN_VALUE;  // Inicializa con el valor mínimo posible
 
         String yearString = null;
-        for (Expense e : u.getExpensesList()) {
+        for (Expense e : getAllExpenses(c)) {
             Double currentSum = e.getMoneySpent();
             // Crea un nuevo formato solo para el año
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
             int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
 
             // Verifica si el gasto es del año 2023
-            if (expenseYear == 2023) {
+            if (expenseYear == Integer.parseInt(añoEstablecido)) {
                 // Obtiene el mes del gasto
                 dateFormat = new SimpleDateFormat("MM");
                 String expenseMonth = String.valueOf(Integer.parseInt(dateFormat.format(e.getTimeDate())));
@@ -253,6 +258,22 @@ public class Controller {
         String monthName = obtenerNombreMes(Integer.parseInt(yearString));
 
         return monthName;
+    }
+
+    public List<String> getUniqueYearsOfExpenses(Context c) {
+        Set<String> uniqueYears = new HashSet<>(); // Usamos un conjunto para evitar repeticiones
+
+        for (Expense e : getAllExpenses(c)) {
+            // Crea un nuevo formato solo para el año
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+            int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
+
+            // Agrega el año al conjunto
+            uniqueYears.add(String.valueOf(expenseYear));
+        }
+
+        // Convierte el conjunto a una lista para devolverla
+        return new ArrayList<>(uniqueYears);
     }
 
     private String obtenerNombreMes(int month) {
@@ -279,21 +300,24 @@ public class Controller {
     }*/
 
 
-    public List<BarEntry> getMonthlyBarChartData() {
+    public List<BarEntry> getMonthlyBarChartData(Context c,String añoEstablecido) {
         List<BarEntry> entries = new ArrayList<>();
 
         // Supongamos que expensesList es tu lista de gastos
         Map<Integer, Double> monthlySums = new HashMap<>();
 
+        for(int i = 1; i<=12;i++){
+            monthlySums.put(i,0.0);
+        }
 
 
-        for (Expense e : u.getExpensesList()) {
+        for (Expense e : getAllExpenses(c)) {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
             int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
 
             // Verifica si el gasto es del año 2023
-            if (expenseYear == 2023) {
+            if (expenseYear == Integer.parseInt(añoEstablecido)) {
 
                 SimpleDateFormat dateFormato = new SimpleDateFormat("MM");
                 int expenseMonth = Integer.parseInt(dateFormato.format(e.getTimeDate()));
@@ -303,8 +327,6 @@ public class Controller {
                 currentSum += e.getMoneySpent();
                 monthlySums.put(expenseMonth, currentSum);
             }
-
-
 
         }
 

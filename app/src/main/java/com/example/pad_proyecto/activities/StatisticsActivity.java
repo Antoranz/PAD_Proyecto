@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pad_proyecto.R;
+import com.example.pad_proyecto.enums.PayMethod;
 import com.example.pad_proyecto.utils.Controller;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -43,6 +45,10 @@ public class StatisticsActivity extends AppCompatActivity {
     private TextView textView;
     private BarChart barChart;
 
+    private Spinner añoEstablecido;
+
+    private TextView textInfo1, textInfo2,textInfo3,textInfo4,textInfoA1,textInfoA2,textInfoA3,textInfoA4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,16 @@ public class StatisticsActivity extends AppCompatActivity {
         spinner = findViewById(R.id.SpinnerStatistics);
         textView = findViewById(R.id.InformacionAdicional);
         barChart = findViewById(R.id.barChart);
+        añoEstablecido = findViewById(R.id.EscribirAño);
+        textInfo1 = findViewById(R.id.TextInfo1);
+        textInfo2 = findViewById(R.id.TextInfo2);
+        textInfo3 = findViewById(R.id.TextInfo3);
+        textInfo4 = findViewById(R.id.TextInfo4);
+        textInfoA1 = findViewById(R.id.TextInfoA1);
+        textInfoA2 = findViewById(R.id.TextInfoA2);
+        textInfoA3 = findViewById(R.id.TextInfoA3);
+        textInfoA4 = findViewById(R.id.TextInfoA4);
+
 
         // Configura opciones del Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -60,6 +76,35 @@ public class StatisticsActivity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        List<String> uniqueYears = Controller.getInstance().getUniqueYearsOfExpenses(this);
+
+        // Crea un ArrayAdapter usando la lista de años y un diseño de Spinner predeterminado
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, uniqueYears);
+
+        // Especifica el diseño que se utilizará cuando se desplieguen las opciones
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Aplica el ArrayAdapter al Spinner
+        añoEstablecido.setAdapter(adapter2);
+
+        // Establece un listener para manejar las selecciones del usuario
+        añoEstablecido.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                cambiarTipoGrafico(spinner.getSelectedItem().toString());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Puedes manejar acciones adicionales si nada está seleccionado
+            }
+        });
+
+
+
 
 
         // Configura el evento de selección del Spinner
@@ -105,7 +150,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private void configurarGraficoPorMes() {
 
 
-        List<BarEntry> barEntries = Controller.getInstance().getMonthlyBarChartData();  // Implementa este método según tus necesidades
+        List<BarEntry> barEntries = Controller.getInstance().getMonthlyBarChartData(this,añoEstablecido.getSelectedItem().toString());  // Implementa este método según tus necesidades
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Dinero Gastado por Mes en 2023");
         BarData barData = new BarData(barDataSet);
@@ -149,6 +194,15 @@ public class StatisticsActivity extends AppCompatActivity {
 
         textView.setVisibility(View.GONE);
 
+        textInfo1.setVisibility(View.GONE);
+        textInfo2.setVisibility(View.GONE);
+        textInfo3.setVisibility(View.GONE);
+        textInfo4.setVisibility(View.GONE);
+        textInfoA1.setVisibility(View.GONE);
+        textInfoA2.setVisibility(View.GONE);
+        textInfoA3.setVisibility(View.GONE);
+        textInfoA4.setVisibility(View.GONE);
+
         barChart.setVisibility(View.VISIBLE);
 
         // Ocultar el gráfico (si es necesario)
@@ -177,55 +231,54 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private void configurarInformacionGeneral() {
 
-        List<String> mostUsedCategories = Controller.getInstance().getMostUsedCategories(this);
-        List<String> mostUsedPaymentMethods = Controller.getInstance().getMostUsedPaymentMethod(this);
-        String categoriesText = "";
-        String paymethodsText = "";
+        List<String> mostUsedCategories = Controller.getInstance().getMostUsedCategories(this,añoEstablecido.getSelectedItem().toString());
 
-        // Lógica para mostrar información adicional en lugar de un gráfico
-        StringBuilder builder = new StringBuilder();
-        builder.append("<font color='#000000'>Categoría/s más utilizada/s: </font> <br/>");
+        List<String> mostUsedPaymentMethods = Controller.getInstance().getMostUsedPaymentMethod(this,añoEstablecido.getSelectedItem().toString());
 
-        for (String category : mostUsedCategories) {
-            builder.append("<font color='#808080'>").append(category).append("</font>, ");
+        textInfoA1.setText(Controller.getInstance().getHighestExpense(this,añoEstablecido.getSelectedItem().toString()));
+        textInfoA2.setText(Controller.getInstance().getMonthWithMostExpenses(this,añoEstablecido.getSelectedItem().toString()));
+
+        String aux = "";
+        for (String s : mostUsedCategories) {
+            aux += s + ", ";
         }
 
-        builder.append("<br/><font color='#000000'>Tipo de pago más utilizado: </font> <br/>");
-
-        for (String paymethod : mostUsedPaymentMethods) {
-            builder.append("<font color='#808080'>").append(paymethod).append("</font>, ");
+        // Verifica que la cadena no esté vacía y luego elimina la última coma y espacio
+        if (!aux.isEmpty()) {
+            aux = aux.substring(0, aux.length() - 2);
         }
 
-        // Elimina la coma adicional al final
-        builder.delete(builder.length() - 2, builder.length());
+        textInfoA3.setText(aux);
 
-        categoriesText = builder.toString();
-        String yearTitle = "<font color='#000000'><big>Año: </big></font><font color='#000000'><big>2023</big></font><br/>";
+        aux = "";
+        for (String s : mostUsedPaymentMethods) {
+            aux += s + ", ";
+        }
+
+        // Verifica que la cadena no esté vacía y luego elimina la última coma y espacio
+        if (!aux.isEmpty()) {
+            aux = aux.substring(0, aux.length() - 2);
+        }
+
+        textInfoA4.setText(aux);
 
 
-
-        String mensaje = yearTitle + "<font color='#000000'>Mayor gasto: </font> <br/>" +
-                "<font color='#808080'>" + Controller.getInstance().getHighestExpense() + "</font>" +
-                "<br/>" +
-                "<font color='#000000'>Mes con más gastos: </font> <br/>" +
-                "<font color='#808080'>" + Controller.getInstance().getMonthWithMostExpenses() + "</font>" +
-                "<br/>"+ categoriesText + "<br/>" + paymethodsText;
-
-
-        // Muestra el mensaje en el TextView adicional
-
-        textView.setText(Html.fromHtml(mensaje));
-
-        textView.setTextSize(18); // Tamaño del texto más grande
-        textView.setLineSpacing(20,2); // Ajuste la separación entre las líneas según sea necesario
-        //textView.setTextColor(Color.BLACK); // Texto en color negro
-
-        // Hacer visible el TextView
-        textView.setVisibility(View.VISIBLE);
         barChart.setVisibility(View.GONE);
+
 
         // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.GONE);
+        // Hacer visible el TextView
+        textInfo1.setVisibility(View.VISIBLE);
+        textInfo2.setVisibility(View.VISIBLE);
+        textInfo3.setVisibility(View.VISIBLE);
+        textInfo4.setVisibility(View.VISIBLE);
+        textInfoA1.setVisibility(View.VISIBLE);
+        textInfoA2.setVisibility(View.VISIBLE);
+        textInfoA3.setVisibility(View.VISIBLE);
+        textInfoA4.setVisibility(View.VISIBLE);
+
+
 
     }
 
@@ -238,7 +291,7 @@ public class StatisticsActivity extends AppCompatActivity {
         List<PieEntry> entries = new ArrayList<>();
         int entryCount = entries.size();
         float textSize = entryCount > 5 ? 12f : 15f; // Tamaño más grande si hay menos entradas
-        for(Pair<String, Double> p : Controller.getInstance().showPayMethodStatistics(this)){
+        for(Pair<String, Double> p : Controller.getInstance().showPayMethodStatistics(this,añoEstablecido.getSelectedItem().toString())){
             if(p.second > 0) {
                 entries.add(new PieEntry(p.second.floatValue(), p.first));
             }
@@ -256,6 +309,15 @@ public class StatisticsActivity extends AppCompatActivity {
         // Hacer visible el TextView
         textView.setVisibility(View.GONE);
 
+        textInfo1.setVisibility(View.GONE);
+        textInfo2.setVisibility(View.GONE);
+        textInfo3.setVisibility(View.GONE);
+        textInfo4.setVisibility(View.GONE);
+        textInfoA1.setVisibility(View.GONE);
+        textInfoA2.setVisibility(View.GONE);
+        textInfoA3.setVisibility(View.GONE);
+        textInfoA4.setVisibility(View.GONE);
+
         barChart.setVisibility(View.GONE);
         // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.VISIBLE);
@@ -267,8 +329,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
         List<PieEntry> entries = new ArrayList<>();
         int entryCount = entries.size();
-        float textSize = entryCount > 5 ? 15f : 16f; // Tamaño más grande si hay menos entradas
-        for(Pair<String, Double> p : Controller.getInstance().showCategoryStatistics(this)){
+        float textSize = entryCount > 5 ? 15f : 13f; // Tamaño más grande si hay menos entradas
+        for(Pair<String, Double> p : Controller.getInstance().showCategoryStatistics(this,añoEstablecido.getSelectedItem().toString())){
             if(p.second > 0) {
                 entries.add(new PieEntry(p.second.floatValue(), p.first));
             }
@@ -296,6 +358,15 @@ public class StatisticsActivity extends AppCompatActivity {
         actualizarGrafico(dataSet,centerText,textSize);
 
         textView.setVisibility(View.GONE);
+
+        textInfo1.setVisibility(View.GONE);
+        textInfo2.setVisibility(View.GONE);
+        textInfo3.setVisibility(View.GONE);
+        textInfo4.setVisibility(View.GONE);
+        textInfoA1.setVisibility(View.GONE);
+        textInfoA2.setVisibility(View.GONE);
+        textInfoA3.setVisibility(View.GONE);
+        textInfoA4.setVisibility(View.GONE);
 
         barChart.setVisibility(View.GONE);
 
