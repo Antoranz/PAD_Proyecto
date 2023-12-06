@@ -267,7 +267,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         List<PieEntry> entries = new ArrayList<>();
         int entryCount = entries.size();
-        float textSize = entryCount > 5 ? 15f : 13f; // Tamaño más grande si hay menos entradas
+        float textSize = entryCount > 5 ? 15f : 16f; // Tamaño más grande si hay menos entradas
         for(Pair<String, Double> p : Controller.getInstance().showCategoryStatistics(this)){
             if(p.second > 0) {
                 entries.add(new PieEntry(p.second.floatValue(), p.first));

@@ -20,7 +20,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button historyButton, addButton, exportButton, deleteButton, statisticButton;
+    Button historyButton, addButton, exportButton, deleteButton, statisticButton, importButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         statisticButton = findViewById(R.id.buttonStatistics);
         statisticButton.setOnClickListener(v -> {
             NavigationManager.getInstance().navigateToStatisticView(this);
+        });
+        importButton = findViewById(R.id.ImportButton);
+        importButton.setOnClickListener(v -> {
+            NavigationManager.getInstance().navigateToImportView(this);
         });
     }
 

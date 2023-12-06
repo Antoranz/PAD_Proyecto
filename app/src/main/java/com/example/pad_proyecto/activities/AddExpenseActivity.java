@@ -89,6 +89,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                                 String fileName = getImageFileNameFromUri(uri);
                                 imageName = fileName;
                                 selectedImagePath = uri.toString();
+
                                 // Actualizar la vista con la imagen seleccionada temporalmente
                                 Bitmap imageBitmap = getBitmapFromUri(this, uri);
                                 galleryImage.setImageBitmap(imageBitmap);

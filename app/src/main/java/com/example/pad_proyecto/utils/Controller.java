@@ -1,16 +1,8 @@
 package com.example.pad_proyecto.utils;
 
-import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.util.Pair;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-
-import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.data.User;
 import com.example.pad_proyecto.databases.DAOImp;
@@ -20,12 +12,12 @@ import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
 import com.github.mikephil.charting.data.BarEntry;
 
-import androidx.core.app.NotificationManagerCompat;
-
+import org.apache.xmlbeans.impl.xb.xsdschema.ListDocument;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,38 +45,6 @@ public class Controller {
         u.addExpense(e);
         ExpenseDAO dao = DAOImp.getInstance(c);
         dao.addExpense(e);
-        checkearNotificacion(c);
-    }
-
-    private void checkearNotificacion(Context c) {
-        if (u.getBudget() != null) {
-            if(u.getBudget()<0) {
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
-                if (ActivityCompat.checkSelfPermission(c, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                    // Crear la notificación
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(c, "mi_notificacion_id")
-                            .setSmallIcon(R.drawable.ic_stat_name)
-                            .setContentTitle("¡Te has calentado!")
-                            .setContentText("Tu presupuesto es inferior a 0")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setAutoCancel(true); // Cierra la notificación cuando se toca
-                    notificationManager.notify(1, builder.build());
-                }
-            }
-            else if(u.getBudget()<((u.getTotalMoneySpent()*10)/100)) {
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
-                if (ActivityCompat.checkSelfPermission(c, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                    // Crear la notificación
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(c, "mi_notificacion_id")
-                            .setSmallIcon(R.drawable.ic_stat_name)
-                            .setContentTitle("¡Ten cuidado con la Cartera!")
-                            .setContentText("Te queda menos del 10% de tu presupuesto")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setAutoCancel(true); // Cierra la notificación cuando se toca
-                    notificationManager.notify(1, builder.build());
-                }
-            }
-        }
     }
 
     public void initInfo(Context c) {
