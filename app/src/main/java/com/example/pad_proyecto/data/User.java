@@ -15,6 +15,7 @@ public class User implements Serializable {
 
     public User(String userName) {
         this.userName = userName;
+        this.budget = null;
     }
 
     public void initInfo(List<Expense> el) {

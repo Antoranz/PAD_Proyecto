@@ -3,6 +3,7 @@ package com.example.pad_proyecto.activities;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -32,13 +34,17 @@ public class ExpenseViewActivity extends AppCompatActivity {
     private ImageView img;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_view);
         Expense e = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            e = getIntent().getSerializableExtra("expense",Expense.class);
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                e = (Expense) extras.getSerializable("expense");
+            }
         }
 
         gasto = findViewById(R.id.expenseName);

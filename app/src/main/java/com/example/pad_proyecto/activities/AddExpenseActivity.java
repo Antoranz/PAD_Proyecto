@@ -126,40 +126,40 @@ public class AddExpenseActivity extends AppCompatActivity {
             Date fecha = null;
             try {
                 fecha = formato.parse(expenseDate);
-            } catch (ParseException e) {
-                showWarningDialog("Por favor, introduce un fecha valida");
-                throw new RuntimeException(e);
-            }
-            String result;
-            if (imageSelected) {
-                result = imageName;
-            } else {
-                result = null;
-            }
-            ExpenseType selectedCategoryEnum = ExpenseType.valueOf(selectedCategory);
-            PayMethod selectedPaymentMethod =  PayMethod.valueOf(selectedPayMethod);
-            Expense newExpense = new Expense(
-                    Controller.getInstance().getUser().getId(),
-                    expenseName,
-                    Double.parseDouble(moneySpent),
-                    fecha,
-                    result,
-                    selectedCategoryEnum,
-                    selectedPaymentMethod,
-                    note
-            );
-            if (imageSelected) {
-                if (imageName != null) {
-                    if (selectedImagePath != null) {
-                        copyImageToAppDataDirectory(Uri.parse(selectedImagePath), imageName);
+                String result;
+                if (imageSelected) {
+                    result = imageName;
+                } else {
+                    result = null;
+                }
+                ExpenseType selectedCategoryEnum = ExpenseType.valueOf(selectedCategory);
+                PayMethod selectedPaymentMethod =  PayMethod.valueOf(selectedPayMethod);
+                Expense newExpense = new Expense(
+                        Controller.getInstance().getUser().getId(),
+                        expenseName,
+                        Double.parseDouble(moneySpent),
+                        fecha,
+                        result,
+                        selectedCategoryEnum,
+                        selectedPaymentMethod,
+                        note
+                );
+                if (imageSelected) {
+                    if (imageName != null) {
+                        if (selectedImagePath != null) {
+                            copyImageToAppDataDirectory(Uri.parse(selectedImagePath), imageName);
+                        }
                     }
                 }
-            }
-            // Guardar el gasto
-            Controller.getInstance().addExpense(newExpense, this);
+                // Guardar el gasto
+                Controller.getInstance().addExpense(newExpense, this);
 
-            // Navegar a la actividad de historial de gastos
-            NavigationManager.getInstance().navigateToMenuView(this);
+                // Navegar a la actividad de historial de gastos
+                NavigationManager.getInstance().navigateToMenuView(this);
+            } catch (ParseException e) {
+                showWarningDialog("Por favor, introduce un fecha valida");
+            }
+
         }
     }
 
@@ -217,21 +217,6 @@ public class AddExpenseActivity extends AppCompatActivity {
         }
         return "expense_image.jpg"; // Valor por defecto si no se puede obtener el nombre
     }
-
-    private Bitmap getBitmapFromFilePath(String filePath) {
-        try {
-            File file = new File(filePath);
-            if (file.exists()) {
-                return BitmapFactory.decodeFile(filePath);
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     private void showWarningDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Advertencia")
