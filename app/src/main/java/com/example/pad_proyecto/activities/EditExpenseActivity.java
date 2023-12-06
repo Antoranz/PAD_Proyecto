@@ -58,9 +58,11 @@ public class EditExpenseActivity extends AppCompatActivity {
 
     private void initUI() {
 
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            e = getIntent().getSerializableExtra("expense",Expense.class);
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                e = (Expense) extras.getSerializable("expense");
+            }
         } else {
             e = null;
         }
@@ -181,50 +183,50 @@ public class EditExpenseActivity extends AppCompatActivity {
             Date fecha = null;
             try {
                 fecha = formato.parse(expenseDate);
-            } catch (ParseException e) {
-                showWarningDialog("Por favor, introduce un fecha valida");
-                throw new RuntimeException(e);
-            }
-            String result;
-            if (imageSelected) {
+                String result;
+                if (imageSelected) {
 
-                result = imageName;
+                    result = imageName;
 
-                if(imgFile.exists()){
+                    if(imgFile.exists()){
 
-                    imgFile.delete();
+                        imgFile.delete();
+
+                    }
+
+
+                } else {
+                    result = e.getImagePath();
 
                 }
-
-
-            } else {
-                result = e.getImagePath();
-
-            }
-            ExpenseType selectedCategoryEnum = ExpenseType.valueOf(selectedCategory);
-            PayMethod selectedPaymentMethod =  PayMethod.valueOf(selectedPayMethod);
-            Expense newExpense = new Expense(
-                    Controller.getInstance().getUser().getId(),
-                    expenseName,
-                    Double.parseDouble(moneySpent),
-                    fecha,
-                    result,
-                    selectedCategoryEnum,
-                    selectedPaymentMethod,
-                    note
-            );
-            if (imageSelected) {
-                if (imageName != null) {
-                    if (selectedImagePath != null) {
-                        copyImageToAppDataDirectory(Uri.parse(selectedImagePath), imageName);
+                ExpenseType selectedCategoryEnum = ExpenseType.valueOf(selectedCategory);
+                PayMethod selectedPaymentMethod =  PayMethod.valueOf(selectedPayMethod);
+                Expense newExpense = new Expense(
+                        Controller.getInstance().getUser().getId(),
+                        expenseName,
+                        Double.parseDouble(moneySpent),
+                        fecha,
+                        result,
+                        selectedCategoryEnum,
+                        selectedPaymentMethod,
+                        note
+                );
+                if (imageSelected) {
+                    if (imageName != null) {
+                        if (selectedImagePath != null) {
+                            copyImageToAppDataDirectory(Uri.parse(selectedImagePath), imageName);
+                        }
                     }
                 }
-            }
-            // Guardar el gasto
-            Controller.getInstance().editExpense( this,e,newExpense);
+                // Guardar el gasto
+                Controller.getInstance().editExpense( this,e,newExpense);
 
-            // Navegar a la actividad de historial de gastos
-            NavigationManager.getInstance().navigateToMenuView(this);
+                // Navegar a la actividad de historial de gastos
+                NavigationManager.getInstance().navigateToMenuView(this);
+            } catch (ParseException e) {
+                showWarningDialog("Por favor, introduce un fecha valida");
+            }
+
         }
     }
 

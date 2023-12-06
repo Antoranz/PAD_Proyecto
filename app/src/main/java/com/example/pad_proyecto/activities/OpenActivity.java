@@ -1,5 +1,8 @@
 package com.example.pad_proyecto.activities;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ public class OpenActivity extends AppCompatActivity {
         Controller.getInstance().initInfo(this);
         User u = Controller.getInstance().getUser();
         TextView b = findViewById(R.id.idBienvenida);
+        createNotificationChannel();
         if(u!=null) b.setText(b.getText()+" "+u.getUserName());
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -42,8 +46,18 @@ public class OpenActivity extends AppCompatActivity {
         NavigationManager.getInstance().navigateToMenuView(this);
     }
     public void changeUserActivity(){NavigationManager.getInstance().navigateToAddUserView(this);}
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "mi_notificacion_id",
+                    "Presupuesto",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+    }
 }
 
-//    public void viewActivity(){NavigationManager.getInstance().navigateToExpenseView(this,new Expense(Controller.getInstance().getUser().getId()
-  //          , "Pan Bimbo", 2.0, Calendar.getInstance(),"81sonOWdkKL.jpg", ExpenseType.Alimentacion, PayMethod.Efectivo,"Este pan esta blando"));}
-//}
+

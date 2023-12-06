@@ -27,7 +27,6 @@ public class NavigationManager {
         if (instance == null) {
             instance = new NavigationManager();
         }
-        instance = new NavigationManager();
         return instance;
     }
 
