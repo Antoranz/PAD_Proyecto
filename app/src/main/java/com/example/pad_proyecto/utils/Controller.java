@@ -12,12 +12,10 @@ import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
 import com.github.mikephil.charting.data.BarEntry;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.ListDocument;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,12 +123,6 @@ public class Controller {
             }
             list.add(new Pair(type.toString(), suma));
         }
-        return list;
-    }
-
-    public List<Pair<String, Double>> showTimeStatistics(Context c) {
-        List<Pair<String, Double>> list = new ArrayList<>();
-        //Se encarga Oscar
         return list;
     }
 
