@@ -35,6 +35,12 @@ public class DeleteExpenseAdapter extends RecyclerView.Adapter<DeleteExpenseAdap
         return new LinkedList<>(selectedExpenses);
     }
 
+    public void selectAllExpenses(LinkedList<Expense> lista){
+        selectedExpenses.clear();
+        selectedExpenses.addAll(lista);
+
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_delete_expense_element, parent, false);

@@ -43,6 +43,7 @@ public class JsonExporter {
             // Crear el archivo JSON
             File file = new File(directory, fileName);
 
+
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write(jsonExpenses);
                 filePath = file.getAbsolutePath();
@@ -54,13 +55,18 @@ public class JsonExporter {
             mediaScanIntent.setData(contentUri);
             context.sendBroadcast(mediaScanIntent);
 
+
+
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(context, "Error al guardar el archivo JSON", Toast.LENGTH_SHORT).show();
         }
 
+
+
         if (filePath != null) {
-            Log.d("FILE_PATH", "Archivo guardado en: " + filePath);
+            Toast.makeText(context, "Archivo JSON guardado con éxito", Toast.LENGTH_SHORT).show();
         }
+
     }
 }

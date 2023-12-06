@@ -48,6 +48,7 @@ public class ImportExpenseActivity extends AppCompatActivity {
             openJsonFilePicker();  // Puedes pasar null o proporcionar una URI inicial si lo deseas
 
 
+
         });
 
     }
@@ -61,6 +62,7 @@ public class ImportExpenseActivity extends AppCompatActivity {
         intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, initialUri);
 
         jsonFileLauncher.launch(intent);
+
     }
 
     private ActivityResultLauncher<Intent> jsonFileLauncher = registerForActivityResult(
@@ -79,6 +81,7 @@ public class ImportExpenseActivity extends AppCompatActivity {
                                 Controller.getInstance().addExpense(expense, this);
                                 Log.d("EXPENSE", expense.toString());
                             }
+                            Toast.makeText(this, "Archivo JSON importado con éxito", Toast.LENGTH_SHORT).show();
 
                         }
                     }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.enums.PayMethod;
@@ -156,7 +157,7 @@ public class StatisticsActivity extends AppCompatActivity {
         BarData barData = new BarData(barDataSet);
 
 
-        barDataSet.setValueTextSize(12f);
+        barDataSet.setValueTextSize(15f);
         barChart.setData(barData);
 
         // Configuración adicional del gráfico de barras
@@ -168,7 +169,7 @@ public class StatisticsActivity extends AppCompatActivity {
         xAxis.setValueFormatter(new MyXAxisValueFormatter());  // Implementa esta clase según tus necesidades
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Cambia la posición del eje X
         xAxis.setGranularity(1f);
-        xAxis.setTextSize(11f);
+        xAxis.setTextSize(12f);
         xAxis.setLabelCount(12);
 
 
@@ -177,6 +178,7 @@ public class StatisticsActivity extends AppCompatActivity {
         yAxisRight.setEnabled(false);  // Desactiva el eje Y derecho si no lo necesitas
         YAxis yAxis = barChart.getAxisLeft();
         yAxis.setTextSize(15f);
+        yAxis.setAxisMinimum(0f);
 
         barChart.setExtraBottomOffset(20f); // Espacio adicional en la parte inferior
         barChart.setExtraLeftOffset(20f);   // Espacio adicional en el lado izquierdo
@@ -186,11 +188,12 @@ public class StatisticsActivity extends AppCompatActivity {
         barChart.setPinchZoom(false);
 
         barData.setBarWidth(0.5f);
-        barChart.setExtraTopOffset(10f);
+
 
 
         Legend legend = barChart.getLegend();
         legend.setTextSize(12f);  // Establece el tamaño del texto de la leyenda
+
 
         textView.setVisibility(View.GONE);
 

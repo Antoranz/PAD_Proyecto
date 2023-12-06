@@ -39,6 +39,7 @@ public class ExportExpenseActivity extends AppCompatActivity {
             List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
             String filename = "expenses.xlsx";
             ExcelExporter.exportExpensesToExcel(this, expenses, filename);
+            Toast.makeText(this, "Archivo Json importado con éxito", Toast.LENGTH_SHORT).show();
         });
     }
 }

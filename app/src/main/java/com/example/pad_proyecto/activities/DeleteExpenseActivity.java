@@ -19,6 +19,7 @@ import java.util.List;
 
 public class DeleteExpenseActivity extends AppCompatActivity {
     private DeleteExpenseAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +44,17 @@ public class DeleteExpenseActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
             LinkedList<Expense> selectedExpenses = adapter.getSelectedExpenses();
+
             Controller.getInstance().deleteExpenses(DeleteExpenseActivity.this, selectedExpenses);
             adapter.notifyDataSetChanged();
             NavigationManager.getInstance().navigateToDeleteExpense(v.getContext());
+        });
+
+        Button selectAllButton = findViewById(R.id.SelectAllbutton);
+        selectAllButton.setOnClickListener(v -> {
+
+            adapter.selectAllExpenses(expensesList);
+            adapter.notifyDataSetChanged();
         });
     }
 }
