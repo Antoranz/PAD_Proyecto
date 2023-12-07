@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
 import com.google.gson.Gson;
 
@@ -59,13 +60,13 @@ public class JsonExporter {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(context, "Error al guardar el archivo JSON", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.q_error_json), Toast.LENGTH_SHORT).show();
         }
 
 
 
         if (filePath != null) {
-            Toast.makeText(context, "Archivo JSON guardado con éxito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.q_json_save), Toast.LENGTH_SHORT).show();
         }
 
     }

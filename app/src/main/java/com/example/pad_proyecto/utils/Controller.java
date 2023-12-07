@@ -214,7 +214,6 @@ public class Controller {
             for (Expense e : dao.getExpensesByPayMethod(type)) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
                 int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
-                // Verifica si el gasto es del año 2023
                 if (expenseYear == Integer.parseInt(añoEstablecido)) {
 
                     sum += 1;

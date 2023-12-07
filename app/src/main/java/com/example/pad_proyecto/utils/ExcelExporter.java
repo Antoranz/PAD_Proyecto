@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -26,12 +27,12 @@ public class ExcelExporter {
 
         Row headerRow = sheet.createRow(0);
         headerRow.createCell(0).setCellValue("ID");
-        headerRow.createCell(1).setCellValue("Fecha");
-        headerRow.createCell(2).setCellValue("Nombre del Gasto");
-        headerRow.createCell(3).setCellValue("Dinero gastado");
-        headerRow.createCell(4).setCellValue("Categoría");
-        headerRow.createCell(5).setCellValue("Metodo de Pago");
-        headerRow.createCell(6).setCellValue("Nota");
+        headerRow.createCell(1).setCellValue(context.getString(R.string.view_fecha).replace(":",""));
+        headerRow.createCell(2).setCellValue(context.getString(R.string.view_gasto).replace(":",""));
+        headerRow.createCell(3).setCellValue(context.getString(R.string.view_dinero_gastado).replace(":",""));
+        headerRow.createCell(4).setCellValue(context.getString(R.string.view_categoria).replace(":",""));
+        headerRow.createCell(5).setCellValue(context.getString(R.string.view_tipo_de_pago).replace(":",""));
+        headerRow.createCell(6).setCellValue(context.getString(R.string.view_nota).replace(":",""));
 
 
         int rowNum = 1;
@@ -52,7 +53,7 @@ public class ExcelExporter {
         if (filePath != null) {
             openExcelFile(context, filePath);
         } else {
-            Toast.makeText(context, "Error al guardar el archivo Excel", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.q_error_excel), Toast.LENGTH_SHORT).show();
         }
         // Cierra el libro de trabajo
         try {
@@ -100,7 +101,7 @@ public class ExcelExporter {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(Intent.createChooser(intent, "Open with"));
         } else {
-            Toast.makeText(context, "No hay aplicaciones instaladas para abrir archivos Excel", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.q_app_excel), Toast.LENGTH_SHORT).show();
         }
     }
 }

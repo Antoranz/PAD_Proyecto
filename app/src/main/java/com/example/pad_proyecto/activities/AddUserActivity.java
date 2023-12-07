@@ -35,7 +35,7 @@ public class AddUserActivity extends AppCompatActivity {
                 Controller.getInstance().addUser(u, this);
                 NavigationManager.getInstance().navigateToMenuView(this);
             }else {
-                Toast.makeText(this,"El nombre no puede ser un campo no vacio", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,R.string.q_name, Toast.LENGTH_LONG).show();
             }
         });
     }

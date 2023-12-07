@@ -21,22 +21,20 @@
     <string name="presupuesto">Budget</string>
     <string name="inciar">Start</string>
     <string name="seleccionar_todos">Select all</string>
-    <string name="alimentacion">Food</string>
-    <string name="transporte">Transportation</string>
-    <string name="alojamiento">Lodging</string>
-    <string name="ocio">Leisure</string>
-    <string name="medicos">Medical</string>
-    <string name="comunicacion">Communication</string>
-    <string name="educacion">Education</string>
-    <string name="ropa">Clothing</string>
-    <string name="viajes">Travel</string>
-    <string name="donaciones">Donations</string>
-    <string name="otros">Others</string>
-    <string name="efectivo">Cash</string>
-    <string name="tarjeta_credito">Credit card</string>
-    <string name="tarjeta_debito">Debit card</string>
-    <string name="transferencia">Bank transfer</string>
-    <string name="pago_movil">Mobile payment</string>
+    <string name="q_gasto">Please enter the name of the expense.</string>
+    <string name="q_ms">Please enter a valid amount for the expense. (Greater than or equal to 0)</string>
+    <string name="q_fecha">Please enter a valid date.</string>
+    <string name="advertencia">Warning</string>
+    <string name="q_name">The name cannot be an empty field.</string>
+    <string name="q_json">JSON file exported successfully.</string>
+    <string name="q_excel">Excel file exported successfully.</string>
+    <string name="q_json_i">JSON file imported successfully.</string>
+    <string name="q_error_excel">Error saving Excel file.</string>
+    <string name="q_app_excel">No applications installed to open Excel files.</string>
+    <string name="q_error_json">Error saving JSON file.</string>
+    <string name="q_json_save">JSON file saved successfully.</string>
+    <string name="no_expenses">There are no expenses in the application.</string>
+
     <string-array name="chart_types">
         <item>By category</item>
         <item>By payment type</item>

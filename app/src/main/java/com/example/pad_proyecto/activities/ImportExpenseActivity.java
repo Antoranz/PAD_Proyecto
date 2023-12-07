@@ -44,7 +44,7 @@ public class ImportExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_import);
         ImportarDatos = findViewById(R.id.jsonButtonImport);
         ImportarDatos.setOnClickListener(v -> {
-            openJsonFilePicker();  // Puedes pasar null o proporcionar una URI inicial si lo deseas
+            openJsonFilePicker();
 
 
 
@@ -73,14 +73,11 @@ public class ImportExpenseActivity extends AppCompatActivity {
                         Uri uri = data.getData();
                         if (uri != null) {
                             List<Expense> expensesImportados = readAndConvertJsonFile(uri);
-
-                            // Haz lo que necesites con la lista de gastos
                             for (Expense expense : expensesImportados) {
-                                // Hacer algo con cada gasto
                                 Controller.getInstance().addExpense(expense, this);
                                 Log.d("EXPENSE", expense.toString());
                             }
-                            Toast.makeText(this, "Archivo JSON importado con éxito", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.q_json_i), Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -99,7 +96,6 @@ public class ImportExpenseActivity extends AppCompatActivity {
             }
             inputStream.close();
 
-            // Convertir el JSON a una lista de Expense utilizando Gson
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Expense>>() {}.getType();
             return gson.fromJson(stringBuilder.toString(), listType);

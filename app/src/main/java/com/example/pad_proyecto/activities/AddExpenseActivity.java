@@ -118,9 +118,11 @@ public class AddExpenseActivity extends AppCompatActivity {
     private void handleSaveExpense(String expenseName,String expenseDate, String moneySpent, String selectedPayMethod, String selectedCategory, String note) {
         // Validar los datos del gasto antes de guardar
         if (expenseName.isEmpty()) {
-            showWarningDialog("Por favor, introduce el nombre del Gasto.");
+            String warning = getString(R.string.q_gasto);
+            showWarningDialog(warning);
         } else if (moneySpent.isEmpty() || Double.parseDouble(moneySpent) < 0) {
-            showWarningDialog("Por favor, introduce un monto válido para el gasto.");
+            String warning = getString(R.string.q_ms);
+            showWarningDialog(warning);
         } else {
             // Crear el objeto Expense
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -158,7 +160,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                 // Navegar a la actividad de historial de gastos
                 NavigationManager.getInstance().navigateToMenuView(this);
             } catch (ParseException e) {
-                showWarningDialog("Por favor, introduce un fecha valida");
+                String warning = getString(R.string.q_fecha);
+                showWarningDialog(warning);
             }
 
         }
@@ -220,7 +223,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
     private void showWarningDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Advertencia")
+        builder.setTitle(R.string.advertencia)
                 .setMessage(message)
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
         AlertDialog dialog = builder.create();

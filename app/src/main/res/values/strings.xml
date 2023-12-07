@@ -20,22 +20,20 @@
     <string name="presupuesto">Presupuesto</string>
     <string name="inciar">Iniciar</string>
     <string name="seleccionar_todos">Seleccionar todos</string>
-    <string name="alimentacion">Alimentación</string>
-    <string name="transporte">Transporte</string>
-    <string name="alojamiento">Alojamiento</string>
-    <string name="ocio">Ocio</string>
-    <string name="medicos">Médicos</string>
-    <string name="comunicacion">Comunicación</string>
-    <string name="educacion">Educación</string>
-    <string name="ropa">Ropa</string>
-    <string name="viajes">Viajes</string>
-    <string name="donaciones">Donaciones</string>
-    <string name="otros">Otros</string>
-    <string name="efectivo">Efectivo</string>
-    <string name="tarjeta_credito">Tarjeta de crédito</string>
-    <string name="tarjeta_debito">Tarjeta de débito</string>
-    <string name="transferencia">Transferencia bancaria</string>
-    <string name="pago_movil">Pago móvil</string>
+    <string name="q_gasto">Por favor, introduce el nombre del Gasto.</string>
+    <string name="q_ms">Por favor, introduce un cantidad válida para el gasto.(Mayor o igual a 0) </string>
+    <string name="q_fecha">Por favor, introduce un fecha valida</string>
+    <string name="advertencia">Advertencia</string>
+    <string name="q_name">El nombre no puede ser un campo no vacio</string>
+    <string name="q_json">Archivo Json exportado con éxito</string>
+    <string name="q_excel">"Archivo excel exportado con éxito"</string>
+    <string name="q_json_i">Archivo Json importado con éxito</string>
+    <string name="q_error_excel">Error al guardar el archivo Excel</string>
+    <string name="q_app_excel">No hay aplicaciones instaladas para abrir archivos Excel</string>
+    <string name="q_error_json">Error al guardar el archivo Json</string>
+    <string name="q_json_save">Archivo JSON guardado con éxito</string>
+    <string name="no_expenses">No hay gastos en la aplicacion</string>
+
     <string-array name="chart_types">
         <item>Por categorías</item>
         <item>Por tipo de pago</item>

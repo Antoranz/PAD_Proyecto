@@ -30,7 +30,8 @@ public class ExportExpenseActivity extends AppCompatActivity {
         jsonButton.setOnClickListener(v -> {
             List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
             JsonExporter.exportExpensesToJson(this, expenses, "expenses.json");
-            Toast.makeText(this, "Archivo Json exportado con éxito", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this, getString(R.string.q_json), Toast.LENGTH_SHORT).show();
 
         });
         excelButton = findViewById(R.id.xlsxButton);
@@ -38,7 +39,7 @@ public class ExportExpenseActivity extends AppCompatActivity {
             List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
             String filename = "expenses.xlsx";
             ExcelExporter.exportExpensesToExcel(this, expenses, filename);
-            Toast.makeText(this, "Archivo excel exportado con éxito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.q_excel), Toast.LENGTH_SHORT).show();
         });
     }
 }
