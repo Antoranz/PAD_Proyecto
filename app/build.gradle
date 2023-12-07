@@ -30,7 +30,6 @@ android {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
-
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'org.apache.poi:poi:5.2.2'
     implementation 'org.apache.poi:poi-ooxml:5.2.2'//exportar en excel
