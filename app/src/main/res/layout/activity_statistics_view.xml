@@ -26,7 +26,8 @@
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
             android:layout_height="508dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            />
 
         <!-- Añade el TextView adicional y configúralo según tus necesidades -->
         <TextView
@@ -45,7 +46,8 @@
             android:layout_width="match_parent"
             android:visibility="gone"
             android:layout_height="525dp"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:textColor="?attr/colorPrimary"/>
 
         <TextView
             android:id="@+id/TextInfo1"

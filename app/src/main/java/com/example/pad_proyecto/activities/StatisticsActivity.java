@@ -1,6 +1,8 @@
 package com.example.pad_proyecto.activities;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
@@ -48,6 +50,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private Spinner añoEstablecido;
 
+    private int colorTexto;
+
     private TextView textInfo1, textInfo2,textInfo3,textInfo4,textInfoA1,textInfoA2,textInfoA3,textInfoA4;
 
     @Override
@@ -68,7 +72,17 @@ public class StatisticsActivity extends AppCompatActivity {
         textInfoA3 = findViewById(R.id.TextInfoA3);
         textInfoA4 = findViewById(R.id.TextInfoA4);
 
-
+        //Eleccion de color para el texto de las leyendas de los graficos en funcion del tema
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                colorTexto = Color.WHITE;
+                break;
+            default:
+                colorTexto = Color.BLACK;
+                break;
+        }
+        
         // Configura opciones del Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
@@ -158,6 +172,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
         barDataSet.setValueTextSize(15f);
+        barDataSet.setValueTextColor(colorTexto);
         barChart.setData(barData);
 
         // Configuración adicional del gráfico de barras
@@ -170,7 +185,9 @@ public class StatisticsActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Cambia la posición del eje X
         xAxis.setGranularity(1f);
         xAxis.setTextSize(12f);
+        xAxis.setTextColor(colorTexto);
         xAxis.setLabelCount(12);
+        xAxis.setAxisLineColor(colorTexto);
 
 
         // Configura el eje Y
@@ -178,6 +195,8 @@ public class StatisticsActivity extends AppCompatActivity {
         yAxisRight.setEnabled(false);  // Desactiva el eje Y derecho si no lo necesitas
         YAxis yAxis = barChart.getAxisLeft();
         yAxis.setTextSize(15f);
+        yAxis.setTextColor(colorTexto);
+        yAxis.setAxisLineColor(colorTexto);
         yAxis.setAxisMinimum(0f);
 
         barChart.setExtraBottomOffset(20f); // Espacio adicional en la parte inferior
@@ -186,13 +205,14 @@ public class StatisticsActivity extends AppCompatActivity {
         barChart.setTouchEnabled(false);  // Desactiva la interacción táctil (zoom y pan)
         barChart.setScaleEnabled(false);  // Desactiva el escalado (zoom)
         barChart.setPinchZoom(false);
-
+        barChart.setNoDataTextColor(colorTexto);
         barData.setBarWidth(0.5f);
 
 
 
         Legend legend = barChart.getLegend();
         legend.setTextSize(12f);  // Establece el tamaño del texto de la leyenda
+        legend.setTextColor(colorTexto);
 
 
         textView.setVisibility(View.GONE);
@@ -397,6 +417,8 @@ public class StatisticsActivity extends AppCompatActivity {
         //legend.setFormSize(15f); // Tamaño de las letras en la leyenda
         // Calcular el tamaño del texto proporcional al número de entradas
         legend.setTextSize(textSize); // Establecer el tamaño del texto de la leyenda
+
+        legend.setTextColor(colorTexto);
 
         pieChart.invalidate();
     }
