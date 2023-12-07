@@ -12,7 +12,6 @@ import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.ExcelExporter;
 import com.example.pad_proyecto.utils.JsonExporter;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -31,7 +30,7 @@ public class ExportExpenseActivity extends AppCompatActivity {
         jsonButton.setOnClickListener(v -> {
             List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
             JsonExporter.exportExpensesToJson(this, expenses, "expenses.json");
-
+            Toast.makeText(this, "Archivo Json exportado con éxito", Toast.LENGTH_SHORT).show();
 
         });
         excelButton = findViewById(R.id.xlsxButton);
@@ -39,7 +38,7 @@ public class ExportExpenseActivity extends AppCompatActivity {
             List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
             String filename = "expenses.xlsx";
             ExcelExporter.exportExpensesToExcel(this, expenses, filename);
-            Toast.makeText(this, "Archivo Json importado con éxito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Archivo excel exportado con éxito", Toast.LENGTH_SHORT).show();
         });
     }
 }
