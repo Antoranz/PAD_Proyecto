@@ -42,6 +42,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,20 +156,26 @@ public class StatisticsActivity extends AppCompatActivity {
     private void cambiarTipoGrafico(String tipoGrafico) {
         // Lógica para cambiar el tipo de gráfico según la selección del Spinner
         // Aquí puedes agregar lógica para diferentes tipos de gráficos
-        switch (tipoGrafico) {
-            case "Por categorías":
-                configurarGraficoPorCategorias();
-                break;
-            case "Por tipo de pago":
-                configurarGraficoPorTipodepago();
-                break;
-            case "Dinero Gastado por Mes":
-                configurarGraficoPorMes();
-                break;
-            case "Informacion General":
-                configurarInformacionGeneral();
-                break;
-            // Puedes agregar más casos según tus necesidades
+
+        String[] chartTypes = getResources().getStringArray(R.array.chart_types);
+
+// Accede a cada elemento del array
+        String porCategorias = chartTypes[0];
+        String porTipoDePago = chartTypes[1];
+        String dineroGastadoPorMes = chartTypes[2];
+        String informacionGeneral = chartTypes[3];
+
+
+        if (porCategorias.equals(tipoGrafico)) {
+            configurarGraficoPorCategorias();
+        } else if (porTipoDePago.equals(tipoGrafico)) {
+            configurarGraficoPorTipodepago();
+        } else if (dineroGastadoPorMes.equals(tipoGrafico)) {
+            configurarGraficoPorMes();
+        } else if (informacionGeneral.equals(tipoGrafico)) {
+            configurarInformacionGeneral();
+        } else {
+            // Caso por defecto si no coincide con ningún caso
         }
     }
 

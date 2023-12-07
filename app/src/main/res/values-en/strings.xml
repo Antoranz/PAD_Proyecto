@@ -6,6 +6,7 @@
     <string name="a_adir_gasto">Add Expense</string>
     <string name="exportar_gastos">Export Expense</string>
     <string name="ver_estadisticas">View Statistics</string>
+    <string name="reiniciar_presupuesto">Reset Budget</string>
     <string name="eliminar_gasto">Delete Expense</string>
     <string name="historybutton">Expense History</string>
     <string name="bienvenido">Welcome</string>
@@ -13,12 +14,13 @@
     <string name="view_fecha">Date:</string>
     <string name="view_dinero_gastado">Money Spent:</string>
     <string name="view_tipo_de_pago">Payment Type:</string>
+    <string name="mensaje_reseteo">"The budget must be greater than 0 or empty if you do not want it to be taken into account."</string>
     <string name="view_categoria">Category:</string>
     <string name="view_nota">Note:</string>
     <string name="guardar">Save</string>
     <string name="eliminar">Delete</string>
     <string name="nombre">Name</string>
-    <string name="presupuesto">Budget</string>
+    <string name="presupuesto">Budget: </string>
     <string name="inciar">Start</string>
     <string name="seleccionar_todos">Select all</string>
     <string name="q_gasto">Please enter the name of the expense.</string>

@@ -5,11 +5,13 @@
     <string name="a_adir_gasto">Añadir Gasto</string>
     <string name="exportar_gastos">Exportar Gasto</string>
     <string name="ver_estadisticas">Ver Estadisticas</string>
+    <string name="reiniciar_presupuesto">Reiniciar Presupuesto</string>
     <string name="eliminar_gasto">Eliminar Gasto</string>
     <string name="historybutton">Historial de Gastos</string>
     <string name="bienvenido">Bienvenido</string>
     <string name="view_gasto">Gasto:</string>
     <string name="view_fecha">Fecha:</string>
+    <string name="mensaje_reseteo">* El presupuesto debe ser mayor que 0 o vacío si no se quiere tener en cuenta</string>
     <string name="view_dinero_gastado">Dinero Gastado:</string>
     <string name="view_tipo_de_pago">Tipo de Pago:</string>
     <string name="view_categoria">Categoría:</string>
@@ -17,7 +19,7 @@
     <string name="guardar">Guardar</string>
     <string name="eliminar">Eliminar</string>
     <string name="nombre">Nombre</string>
-    <string name="presupuesto">Presupuesto</string>
+    <string name="presupuesto">Presupuesto: </string>
     <string name="inciar">Iniciar</string>
     <string name="seleccionar_todos">Seleccionar todos</string>
     <string name="q_gasto">Por favor, introduce el nombre del Gasto.</string>

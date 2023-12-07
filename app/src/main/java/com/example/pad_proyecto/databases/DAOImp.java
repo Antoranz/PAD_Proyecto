@@ -187,7 +187,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
         ContentValues values = new ContentValues();
         values.put(COLUMN_BUDGET, budget);
 
-        db.update(TABLE_USER, values, COLUMN_ID + " = ?",
+        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(id)});
 
         db.close();

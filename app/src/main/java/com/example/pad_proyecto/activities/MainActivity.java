@@ -3,6 +3,7 @@ package com.example.pad_proyecto.activities;
 import android.database.ContentObservable;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,8 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button historyButton, addButton, exportButton, deleteButton, statisticButton, importButton;
+    Button historyButton, addButton, exportButton, deleteButton, statisticButton, importButton , resetButton;
+    TextView budgetText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,24 @@ public class MainActivity extends AppCompatActivity {
         importButton.setOnClickListener(v -> {
             NavigationManager.getInstance().navigateToImportView(this);
         });
+        resetButton = findViewById(R.id.buttonReset);
+        resetButton.setOnClickListener(v -> {
+            NavigationManager.getInstance().navigateToResetView(this);
+        });
+        budgetText = findViewById(R.id.textViewPresupuesto);
+
+        Double budget = Controller.getInstance().getBudget();
+
+        if(budget == null){
+            budgetText.setText("-");
+        }else{
+            budgetText.setText(budget.toString());
+        }
+
+
+
+
+
     }
 
 }

@@ -168,6 +168,18 @@ public class Controller {
         return list;
     }
 
+    public Double getBudget(){
+        return u.getBudget();
+    }
+
+    public void setBudget(Context c,Double newBudget){
+
+        u.setBudget(newBudget);
+        UserDAO dao = DAOImp.getInstance(c);
+        dao.updateUserBudget(u.getId(), newBudget);
+
+    }
+
 
     public void deleteExpenses(Context context, LinkedList<Expense> expenses) {
         u.deleteExpenses(expenses);

@@ -14,7 +14,7 @@ import com.example.pad_proyecto.activities.FullScreenActivity;
 import com.example.pad_proyecto.activities.ImportExpenseActivity;
 import com.example.pad_proyecto.activities.ListActivity;
 import com.example.pad_proyecto.activities.MainActivity;
-import com.example.pad_proyecto.activities.OpenActivity;
+import com.example.pad_proyecto.activities.ResetBudgetActivity;
 import com.example.pad_proyecto.activities.StatisticsActivity;
 import com.example.pad_proyecto.data.Expense;
 
@@ -142,6 +142,18 @@ public class NavigationManager {
             context.startActivity(intent);
         } else {
             Log.d("TAG","Error al cambiar a la pantalla de AddUser");
+        }
+
+    }
+
+    public void navigateToResetView(Context context) {
+
+        if (context != null) {
+            Intent intent = new Intent(context, ResetBudgetActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } else {
+            Log.d("TAG","Error al cambiar a la pantalla de ResetBudget");
         }
 
     }
