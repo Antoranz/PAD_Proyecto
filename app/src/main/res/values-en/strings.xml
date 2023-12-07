@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpendWise</string>
+    <string name="addExpenseText">Add Expense</string>
+    <string name="importar_datos">Import Data</string>
+    <string name="a_adir_gasto">Add Expense</string>
+    <string name="exportar_gastos">Export Expense</string>
+    <string name="ver_estadisticas">View Statistics</string>
+    <string name="eliminar_gasto">Delete Expense</string>
+    <string name="historybutton">Expense History</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="view_gasto">Expense:</string>
+    <string name="view_fecha">Date:</string>
+    <string name="view_dinero_gastado">Money Spent:</string>
+    <string name="view_tipo_de_pago">Payment Type:</string>
+    <string name="view_categoria">Category:</string>
+    <string name="view_nota">Note:</string>
+    <string name="guardar">Save</string>
+    <string name="eliminar">Delete</string>
+    <string name="nombre">Name</string>
+    <string name="presupuesto">Budget</string>
+    <string name="inciar">Start</string>
+    <string name="seleccionar_todos">Select all</string>
+    <string name="alimentacion">Food</string>
+    <string name="transporte">Transportation</string>
+    <string name="alojamiento">Lodging</string>
+    <string name="ocio">Leisure</string>
+    <string name="medicos">Medical</string>
+    <string name="comunicacion">Communication</string>
+    <string name="educacion">Education</string>
+    <string name="ropa">Clothing</string>
+    <string name="viajes">Travel</string>
+    <string name="donaciones">Donations</string>
+    <string name="otros">Others</string>
+    <string name="efectivo">Cash</string>
+    <string name="tarjeta_credito">Credit card</string>
+    <string name="tarjeta_debito">Debit card</string>
+    <string name="transferencia">Bank transfer</string>
+    <string name="pago_movil">Mobile payment</string>
+    <string-array name="chart_types">
+        <item>By category</item>
+        <item>By payment type</item>
+        <item>Money Spent per Month</item>
+        <item>General Information</item>
+        <!-- You can add more options as needed -->
+    </string-array>
+    <string-array name="year_types">
+        <item>By category</item>
+        <item>By payment type</item>
+        <item>Money Spent per Month</item>
+        <item>General Information</item>
+        <!-- You can add more options as needed -->
+    </string-array>
+
+</resources>

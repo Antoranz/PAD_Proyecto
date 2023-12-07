@@ -36,7 +36,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Gasto:"
+                    android:text="@string/view_gasto"
+                    android:textColor="?attr/colorPrimary"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -46,6 +47,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimaryVariant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -60,7 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Fecha:"
+                    android:text="@string/view_fecha"
+                    android:textColor="?attr/colorPrimary"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -69,6 +72,7 @@
                     android:id="@+id/timeDate"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
+                    android:textColor="?attr/colorPrimaryVariant"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,7 +89,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Dinero Gastado:"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/view_dinero_gastado"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -95,6 +100,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimaryVariant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -110,7 +116,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Tipo de Pago:"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/view_tipo_de_pago"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -121,6 +128,7 @@
                     android:layout_marginLeft="8dp"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
+                    android:textColor="?attr/colorPrimaryVariant"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -135,7 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Categoría:"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/view_categoria"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -145,6 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
+                    android:textColor="?attr/colorPrimaryVariant"
                     android:layout_marginTop="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="20sp" />
@@ -160,7 +170,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Nota:"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/view_nota"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -170,6 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginLeft="8dp"
+                    android:textColor="?attr/colorPrimaryVariant"
                     android:layout_marginTop="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="20sp" />

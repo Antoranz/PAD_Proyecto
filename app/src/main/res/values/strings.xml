@@ -1,6 +1,41 @@
 <resources>
     <string name="app_name">SpendWise</string>
     <string name="addExpenseText">Añadir Gasto</string>
+    <string name="importar_datos">Importar datos</string>
+    <string name="a_adir_gasto">Añadir Gasto</string>
+    <string name="exportar_gastos">Exportar Gasto</string>
+    <string name="ver_estadisticas">Ver Estadisticas</string>
+    <string name="eliminar_gasto">Eliminar Gasto</string>
+    <string name="historybutton">Historial de Gastos</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="view_gasto">Gasto:</string>
+    <string name="view_fecha">Fecha:</string>
+    <string name="view_dinero_gastado">Dinero Gastado:</string>
+    <string name="view_tipo_de_pago">Tipo de Pago:</string>
+    <string name="view_categoria">Categoría:</string>
+    <string name="view_nota">Nota:</string>
+    <string name="guardar">Guardar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="nombre">Nombre</string>
+    <string name="presupuesto">Presupuesto</string>
+    <string name="inciar">Iniciar</string>
+    <string name="seleccionar_todos">Seleccionar todos</string>
+    <string name="alimentacion">Alimentación</string>
+    <string name="transporte">Transporte</string>
+    <string name="alojamiento">Alojamiento</string>
+    <string name="ocio">Ocio</string>
+    <string name="medicos">Médicos</string>
+    <string name="comunicacion">Comunicación</string>
+    <string name="educacion">Educación</string>
+    <string name="ropa">Ropa</string>
+    <string name="viajes">Viajes</string>
+    <string name="donaciones">Donaciones</string>
+    <string name="otros">Otros</string>
+    <string name="efectivo">Efectivo</string>
+    <string name="tarjeta_credito">Tarjeta de crédito</string>
+    <string name="tarjeta_debito">Tarjeta de débito</string>
+    <string name="transferencia">Transferencia bancaria</string>
+    <string name="pago_movil">Pago móvil</string>
     <string-array name="chart_types">
         <item>Por categorías</item>
         <item>Por tipo de pago</item>
