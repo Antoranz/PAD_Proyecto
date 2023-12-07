@@ -2,7 +2,9 @@ package com.example.pad_proyecto.activities;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
@@ -18,10 +20,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.enums.PayMethod;
 import com.example.pad_proyecto.utils.Controller;
+import com.example.pad_proyecto.utils.NavigationManager;
+import com.example.pad_proyecto.utils.NotificacionSinGastos;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -82,64 +87,69 @@ public class StatisticsActivity extends AppCompatActivity {
                 colorTexto = Color.BLACK;
                 break;
         }
-        
-        // Configura opciones del Spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.chart_types,
-                android.R.layout.simple_spinner_item
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
-        List<String> uniqueYears = Controller.getInstance().getUniqueYearsOfExpenses(this);
+        if(!Controller.getInstance().getAllExpenses(this).isEmpty()) {
+            // Configura opciones del Spinner
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this,
+                    R.array.chart_types,
+                    android.R.layout.simple_spinner_item
+            );
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
 
-        // Crea un ArrayAdapter usando la lista de años y un diseño de Spinner predeterminado
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, uniqueYears);
+            List<String> uniqueYears = Controller.getInstance().getUniqueYearsOfExpenses(this);
 
-        // Especifica el diseño que se utilizará cuando se desplieguen las opciones
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Crea un ArrayAdapter usando la lista de años y un diseño de Spinner predeterminado
+            ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, uniqueYears);
 
-        // Aplica el ArrayAdapter al Spinner
-        añoEstablecido.setAdapter(adapter2);
+            // Especifica el diseño que se utilizará cuando se desplieguen las opciones
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // Establece un listener para manejar las selecciones del usuario
-        añoEstablecido.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            // Aplica el ArrayAdapter al Spinner
+            añoEstablecido.setAdapter(adapter2);
 
-                cambiarTipoGrafico(spinner.getSelectedItem().toString());
+            // Establece un listener para manejar las selecciones del usuario
+            añoEstablecido.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-            }
+                    cambiarTipoGrafico(spinner.getSelectedItem().toString());
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Puedes manejar acciones adicionales si nada está seleccionado
-            }
-        });
+                }
 
-
-
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // Puedes manejar acciones adicionales si nada está seleccionado
+                }
+            });
 
 
-        // Configura el evento de selección del Spinner
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Lógica para cambiar el tipo de gráfico según la selección
-                String chartType = parentView.getItemAtPosition(position).toString();
-                cambiarTipoGrafico(chartType);
-            }
+            // Configura el evento de selección del Spinner
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    // Lógica para cambiar el tipo de gráfico según la selección
+                    String chartType = parentView.getItemAtPosition(position).toString();
+                    cambiarTipoGrafico(chartType);
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Puedes manejar acciones adicionales si nada está seleccionado
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // Puedes manejar acciones adicionales si nada está seleccionado
+                }
+            });
 
-        // Configura el gráfico inicial
-        configurarGraficoPorCategorias();
-
+            // Configura el gráfico inicial
+            configurarGraficoPorCategorias();
+        }
+        else{
+            MostrarDialogo();
+        }
+    }
+    public void MostrarDialogo() {
+        DialogFragment newFragment = new NotificacionSinGastos();
+        newFragment.show(getSupportFragmentManager(), "Singastos");
     }
 
     private void cambiarTipoGrafico(String tipoGrafico) {

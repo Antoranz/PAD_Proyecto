@@ -10,8 +10,8 @@
         android:layout_width="235dp"
         android:layout_height="229dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="?attr/colorPrimaryVariant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_channel_foreground" />
@@ -20,8 +20,7 @@
         android:id="@+id/historyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorPrimaryVariant"
-        android:text="HistoryButton"
+        android:text="@string/historybutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -33,10 +32,10 @@
         android:id="@+id/addExpenseButton"
         android:layout_width="171dp"
         android:layout_height="50dp"
-        android:text="Añadir Gasto"
+        android:text="@string/a_adir_gasto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.174" />
@@ -45,7 +44,7 @@
         android:id="@+id/deleteExpenseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ELIMINAR GASTO"
+        android:text="@string/eliminar_gasto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -57,23 +56,35 @@
         android:id="@+id/buttonExport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EXPORTAR GASTOS"
+        android:text="@string/exportar_gastos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.943" />
+        app:layout_constraintVertical_bias="0.939" />
 
     <Button
         android:id="@+id/buttonStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver estadisticas"
+        android:text="@string/ver_estadisticas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toEndOf="@+id/deleteExpenseButton"
         app:layout_constraintTop_toBottomOf="@+id/addExpenseButton"
-        app:layout_constraintVertical_bias="0.398" />
+        app:layout_constraintVertical_bias="0.402" />
+
+    <Button
+        android:id="@+id/ImportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/importar_datos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintStart_toEndOf="@+id/buttonExport"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.936" />
 </androidx.constraintlayout.widget.ConstraintLayout>

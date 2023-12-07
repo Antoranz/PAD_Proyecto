@@ -91,6 +91,7 @@ public class SpendResultListAdapter extends RecyclerView.Adapter<SpendResultList
                 @Override
                 public void onClick(View v){
                     Controller.getInstance().deleteExpense(context,e);
+                    NavigationManager.getInstance().navigateToHistory(context);
                 }
             });;
         }
