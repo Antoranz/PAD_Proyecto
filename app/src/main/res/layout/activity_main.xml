@@ -98,8 +98,6 @@
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold"
             android:textSize="23sp" />
-
-        <!-- TextView para el valor del presupuesto (ajusta los atributos según tus necesidades) -->
         <TextView
             android:id="@+id/textViewPresupuesto"
             android:layout_width="wrap_content"

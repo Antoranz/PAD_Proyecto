@@ -35,6 +35,7 @@
     <string name="q_error_json">Error al guardar el archivo Json</string>
     <string name="q_json_save">Archivo JSON guardado con éxito</string>
     <string name="no_expenses">No hay gastos en la aplicacion</string>
+    <string name="joke">Gasta pero gasta sonriendo :)</string>
 
     <string-array name="chart_types">
         <item>Por categorías</item>

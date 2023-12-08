@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.example.pad_proyecto.data.User;
 import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
 import com.example.pad_proyecto.utils.Controller;
+import com.example.pad_proyecto.utils.JokeApiTask;
 import com.example.pad_proyecto.utils.NavigationManager;
 
 import java.util.Calendar;
@@ -30,6 +32,23 @@ public class OpenActivity extends AppCompatActivity {
         TextView b = findViewById(R.id.idBienvenida);
         createNotificationChannel();
         if(u!=null) b.setText(b.getText()+" "+u.getUserName());
+
+        JokeApiTask jokeApiTask = new JokeApiTask();
+        TextView jokeTextView = findViewById(R.id.jokeTextView);
+        try{
+            jokeApiTask.fetchJoke();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    jokeTextView.setText(jokeApiTask.getJoke().replaceAll("(\n|\r|\r\n)", " "));
+                }
+            }, 1000);
+
+        }catch(Error e){
+            jokeTextView.setText("");
+            Log.d("TAG","Error al cargar el chiste");
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -39,7 +58,7 @@ public class OpenActivity extends AppCompatActivity {
                     changeUserActivity();
                 }
             }
-        }, 3000);
+        }, 5000);
 
     }
     public void changeActivity(){
