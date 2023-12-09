@@ -40,9 +40,14 @@ public class OpenActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    jokeTextView.setText(jokeApiTask.getJoke().replaceAll("(\n|\r|\r\n)", " "));
+                    try{
+                        jokeTextView.setText(jokeApiTask.getJoke().replaceAll("(\n|\r|\r\n)", " "));
+                    }
+                    catch(Error e){
+                        Log.d("API",    "No se ha cargado ninguna broma");
+                    }
                 }
-            }, 1000);
+            }, 3000);
 
         }catch(Error e){
             jokeTextView.setText("");

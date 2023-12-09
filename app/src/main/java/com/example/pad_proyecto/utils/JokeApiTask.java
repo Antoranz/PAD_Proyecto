@@ -18,6 +18,7 @@ public class JokeApiTask {
     public JokeApiTask(){
         String languageCode = Locale.getDefault().getLanguage();
         API_URL += languageCode;
+        result = "";
     }
     public void fetchJoke() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
