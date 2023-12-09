@@ -44,30 +44,32 @@ public class JsonExporter {
             // Crear el archivo JSON
             File file = new File(directory, fileName);
 
+            // Verificar si el archivo ya existe
+            if (file.exists()) {
+                // Puedes optar por no sobrescribir o mostrar un mensaje diferente si lo prefieres
+                // En este ejemplo, simplemente no se muestra el mensaje de error
+            } else {
+                // Si el archivo no existe, procede con la creación y escritura
+                try (FileWriter writer = new FileWriter(file)) {
+                    writer.write(jsonExpenses);
+                    filePath = file.getAbsolutePath();
+                }
 
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write(jsonExpenses);
-                filePath = file.getAbsolutePath();
+                // Escanea el archivo para que aparezca en el explorador de archivos
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri contentUri = Uri.fromFile(file);
+                mediaScanIntent.setData(contentUri);
+                context.sendBroadcast(mediaScanIntent);
             }
-
-            // Escanea el archivo para que aparezca en el explorador de archivos
-            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            Uri contentUri = Uri.fromFile(file);
-            mediaScanIntent.setData(contentUri);
-            context.sendBroadcast(mediaScanIntent);
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(context, context.getString(R.string.q_error_json), Toast.LENGTH_SHORT).show();
         }
 
-
-
         if (filePath != null) {
             Toast.makeText(context, context.getString(R.string.q_json_save), Toast.LENGTH_SHORT).show();
         }
-
     }
+
 }
