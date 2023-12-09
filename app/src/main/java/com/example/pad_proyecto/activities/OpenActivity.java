@@ -30,7 +30,7 @@ public class OpenActivity extends AppCompatActivity {
         Controller.getInstance().initInfo(this);
         User u = Controller.getInstance().getUser();
         TextView b = findViewById(R.id.idBienvenida);
-        createNotificationChannel();
+
         if(u!=null) b.setText(b.getText()+" "+u.getUserName());
 
         JokeApiTask jokeApiTask = new JokeApiTask();
@@ -70,18 +70,7 @@ public class OpenActivity extends AppCompatActivity {
         NavigationManager.getInstance().navigateToMenuView(this);
     }
     public void changeUserActivity(){NavigationManager.getInstance().navigateToAddUserView(this);}
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    "mi_notificacion_id",
-                    "Presupuesto",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
 
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
-    }
 }
 
 

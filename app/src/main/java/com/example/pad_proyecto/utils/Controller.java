@@ -1,7 +1,13 @@
 package com.example.pad_proyecto.utils;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.util.Log;
 import android.util.Pair;
 
 import androidx.core.app.ActivityCompat;
@@ -10,6 +16,8 @@ import androidx.core.app.NotificationManagerCompat;
 import android.Manifest;
 
 import com.example.pad_proyecto.R;
+import com.example.pad_proyecto.activities.MainActivity;
+import com.example.pad_proyecto.activities.OpenActivity;
 import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.data.User;
 import com.example.pad_proyecto.databases.DAOImp;
@@ -35,6 +43,7 @@ import java.util.Set;
 public class Controller {
     private User u;
     static Controller instance;
+    NotificationManager notificationManager;
 
     public static Controller getInstance() {
         if (instance != null) {
@@ -56,32 +65,53 @@ public class Controller {
         dao.addExpense(e);
         checkearNotificacion(c);
     }
+    private void createNotificationChannel(Context c) {
+        notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            NotificationChannel channel = notificationManager.getNotificationChannel("mi_notificacion_id");
+            if (channel == null) {
+                channel = new NotificationChannel(
+                        "mi_notificacion_id",
+                        "Presupuesto",
+                        NotificationManager.IMPORTANCE_DEFAULT
+                );
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+
+    }
     private void checkearNotificacion(Context c) {
+        createNotificationChannel(c);
         if (u.getBudget() != null) {
-            if(u.getBudget()<0) {
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
-                if (ActivityCompat.checkSelfPermission(c, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                    // Crear la notificación
+            if (u.getBudget() < 0) {
+                try {
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(c, "mi_notificacion_id")
                             .setSmallIcon(R.drawable.ic_stat_name)
                             .setContentTitle("¡Te has calentado!")
                             .setContentText("Tu presupuesto es inferior a 0")
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setAutoCancel(true); // Cierra la notificación cuando se toca
+                            .setAutoCancel(true);
+                    NotificationManager notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.notify(1, builder.build());
+                } catch (Exception e) {
+                    Log.d("NOT", "Error en la notificacion");
                 }
-            }
-            else if(u.getBudget()<((u.getTotalMoneySpent()*10)/100)) {
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
-                if (ActivityCompat.checkSelfPermission(c, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                    // Crear la notificación
+
+            } else if (u.getBudget() < ((u.getTotalMoneySpent() * 10) / 100)) {
+                try {
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(c, "mi_notificacion_id")
                             .setSmallIcon(R.drawable.ic_stat_name)
                             .setContentTitle("¡Ten cuidado con la Cartera!")
                             .setContentText("Te queda menos del 10% de tu presupuesto")
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setAutoCancel(true); // Cierra la notificación cuando se toca
+                            .setAutoCancel(true);
+                    NotificationManager notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.notify(1, builder.build());
+                } catch (Exception e) {
+                    Log.d("NOT", "Error en la notificacion");
                 }
             }
         }
@@ -332,21 +362,6 @@ public class Controller {
         return nombresMeses[month - 1];
     }
 
-    /*public List<BarEntry> getExpensesByYear() {
-        List<BarEntry> expensesInTargetYear = new ArrayList<>();
-
-        for (Expense e : u.getExpensesList()) {
-            // Suponiendo que la fecha está en el formato "yyyy-MM-dd HH:mm:ss"
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-            int expenseYear = Integer.parseInt(dateFormat.format(e.getTimeDate()));
-
-            if (expenseYear == 2023) {
-                expensesInTargetYear.add(e);
-            }
-        }
-
-        return expensesInTargetYear;
-    }*/
 
 
     public List<BarEntry> getMonthlyBarChartData(Context c,String añoEstablecido) {

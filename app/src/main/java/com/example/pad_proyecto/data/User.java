@@ -51,7 +51,9 @@ public class User implements Serializable {
         if (expenseList == null) {
             expenseList = new ArrayList<>();
         }
-
+        if(budget!=null){
+            budget-=e.getMoneySpent();
+        }
         totalMoneySpent += e.getMoneySpent();
         expenseList.add(e);
         expenseList.sort((expense1, expense2) -> expense1.getTimeDate().compareTo(expense2.getTimeDate()));
@@ -60,6 +62,9 @@ public class User implements Serializable {
     public void deleteExpense(Expense e) {
         totalMoneySpent -= e.getMoneySpent();
         expenseList.remove(e);
+        if(budget!=null){
+            budget+=e.getMoneySpent();
+        }
     }
     public void deleteExpenses(LinkedList<Expense> e) {
         for(int i=0;i<e.size();i++){
