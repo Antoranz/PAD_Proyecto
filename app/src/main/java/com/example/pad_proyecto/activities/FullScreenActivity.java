@@ -34,10 +34,6 @@ public class FullScreenActivity extends AppCompatActivity {
                 Glide.with(this)
                         .load(imgUri)
                         .into(img);
-
-
-
-
             }
 
         }
