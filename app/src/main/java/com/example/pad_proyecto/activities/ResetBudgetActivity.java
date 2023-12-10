@@ -21,13 +21,17 @@ public class ResetBudgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_budget);
 
         editText = findViewById(R.id.editTextPresupuesto);
-        editText.setText(Controller.getInstance().getBudget().toString());
+        if(Controller.getInstance().getBudget()!=null){
+            editText.setText(Controller.getInstance().getBudget().toString());
+        }
         resetButton = findViewById(R.id.buttonResetBudget);
         resetButton.setOnClickListener(v -> {
-
-            Controller.getInstance().setBudget(this,Double.parseDouble(String.valueOf(editText.getText())));
+            if(!editText.getText().toString().isEmpty()){
+                Controller.getInstance().setBudget(this,Double.parseDouble(editText.getText().toString()));
+            }else{
+                Controller.getInstance().setBudget(this,null);
+            }
             NavigationManager.getInstance().navigateToMenuView(this);
-
         });
 
 

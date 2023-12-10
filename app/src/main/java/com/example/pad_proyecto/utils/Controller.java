@@ -63,7 +63,10 @@ public class Controller {
         u.addExpense(e);
         ExpenseDAO dao = DAOImp.getInstance(c);
         dao.addExpense(e);
-        checkearNotificacion(c);
+        if(u.getBudget()!=null){
+            checkearNotificacion(c);
+        }
+
     }
     private void createNotificationChannel(Context c) {
         notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -203,10 +206,16 @@ public class Controller {
     }
 
     public void setBudget(Context c,Double newBudget){
+        if(newBudget==null){
+            u.setBudget(null);
+            UserDAO dao = DAOImp.getInstance(c);
+            dao.updateUserBudget(u.getId(), null);
+        }else{
+            u.setBudget(newBudget);
+            UserDAO dao = DAOImp.getInstance(c);
+            dao.updateUserBudget(u.getId(), newBudget);
+        }
 
-        u.setBudget(newBudget);
-        UserDAO dao = DAOImp.getInstance(c);
-        dao.updateUserBudget(u.getId(), newBudget);
 
     }
 

@@ -167,7 +167,13 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
         while (cursor.moveToNext()) {
             long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
             String userName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USER_NAME));
-            Double budget = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_BUDGET));
+            Double budget;
+            if (!cursor.isNull(cursor.getColumnIndexOrThrow(COLUMN_BUDGET))) {
+                budget = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_BUDGET));
+            } else {
+                budget=null;
+            }
+
             Double tmoney = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_USER_TOTALMONEY));
             User u = new User(userName);
             u.setBudget(budget);
@@ -181,7 +187,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
 
         return userList;
     }
-    public void updateUserBudget(long id, double budget){
+    public void updateUserBudget(long id, Double budget){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -249,7 +255,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
             long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
             String expenseName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
-            double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
+            Double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
             // Crea un objeto Instant utilizando el valor long
@@ -299,7 +305,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
             long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
             String expenseName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
-            double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
+            Double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
             // Crea un objeto Instant utilizando el valor long
@@ -344,7 +350,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID));
             long userId = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_USER_ID));
             String expenseName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
-            double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
+            Double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
             // Crea un objeto Instant utilizando el valor long

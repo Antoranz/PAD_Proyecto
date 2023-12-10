@@ -9,7 +9,7 @@ public class User implements Serializable {
 
     private long id;
     private String userName;
-    private double totalMoneySpent = 0.0;
+    private Double totalMoneySpent = 0.0;
     private Double budget;
     private List<Expense> expenseList;
 
@@ -27,15 +27,15 @@ public class User implements Serializable {
         return userName;
     }
 
-    public double getTotalMoneySpent() {
+    public Double getTotalMoneySpent() {
         return totalMoneySpent;
     }
 
-    public void setTotalMoneySpent(double tm){
+    public void setTotalMoneySpent(Double tm){
         totalMoneySpent=tm;
     }
 
-    public void setBudget(double b) {
+    public void setBudget(Double b) {
         budget = b;
     }
 
