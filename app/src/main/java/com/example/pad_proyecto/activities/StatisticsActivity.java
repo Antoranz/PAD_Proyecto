@@ -157,8 +157,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
         // Configura el eje X
         XAxis xAxis = barChart.getXAxis();
-        xAxis.setValueFormatter(new MyXAxisValueFormatter());  // Implementa esta clase según tus necesidades
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Cambia la posición del eje X
+        xAxis.setValueFormatter(new MyXAxisValueFormatter());
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
         xAxis.setTextSize(12f);
         xAxis.setTextColor(colorTexto);
@@ -210,13 +210,15 @@ public class StatisticsActivity extends AppCompatActivity {
             int month = (int) value;
             return obtenerNombreMes(month);
         }
-        // Implementa esta función para obtener el nombre del mes según su número (1 para enero, 2 para febrero, etc.)
+
         private String obtenerNombreMes(int month) {
             String[] nombresMeses = {"E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"};
             return nombresMeses[month - 1];
         }
     }
     private void configurarInformacionGeneral() {
+
+        // Configura la información general del usuario
 
         List<String> mostUsedCategories = Controller.getInstance().getMostUsedCategories(this,añoEstablecido.getSelectedItem().toString());
         List<String> mostUsedPaymentMethods = Controller.getInstance().getMostUsedPaymentMethod(this,añoEstablecido.getSelectedItem().toString());

@@ -92,7 +92,6 @@ public class AddExpenseActivity extends AppCompatActivity {
                     }
                 });
 
-        // Inicializar el spinner con las categorías y los tipos de pago
         ExpenseType[] categoryValues = ExpenseType.values();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Arrays.stream(categoryValues)
                 .map(Enum::name)
@@ -107,7 +106,6 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
 
     private void handleSaveExpense(String expenseName,String expenseDate, String moneySpent, String selectedPayMethod, String selectedCategory, String note) {
-        // Validar los datos del gasto antes de guardar
         if (expenseName.isEmpty()) {
             String warning = getString(R.string.q_gasto);
             showWarningDialog(warning);

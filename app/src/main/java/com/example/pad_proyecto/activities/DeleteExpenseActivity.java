@@ -25,7 +25,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     }
     private void initIGUI() {
         RecyclerView rv = findViewById(R.id.recyclerViewDelete);
-        // Tu lista de gastos
+
         LinkedList<Expense> expensesList = Controller.getInstance().getAllExpenses(this);
         // Inicializa el RecyclerView y su adaptador
         adapter = new DeleteExpenseAdapter(expensesList, this);
