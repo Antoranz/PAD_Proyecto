@@ -1,31 +1,19 @@
 package com.example.pad_proyecto.activities;
 
-import android.annotation.SuppressLint;
+
 import android.content.res.Configuration;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.pad_proyecto.R;
-import com.example.pad_proyecto.enums.PayMethod;
 import com.example.pad_proyecto.utils.Controller;
-import com.example.pad_proyecto.utils.NavigationManager;
 import com.example.pad_proyecto.utils.NotificacionSinGastos;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -41,25 +29,17 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StatisticsActivity extends AppCompatActivity {
-
-
     private PieChart pieChart;
     private Spinner spinner;
     private TextView textView;
     private BarChart barChart;
-
     private Spinner añoEstablecido;
-
     private int colorTexto;
-
     private TextView textInfo1, textInfo2,textInfo3,textInfo4,textInfoA1,textInfoA2,textInfoA3,textInfoA4;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +68,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 colorTexto = Color.BLACK;
                 break;
         }
-
         if(!Controller.getInstance().getAllExpenses(this).isEmpty()) {
-            // Configura opciones del Spinner
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                     this,
                     R.array.chart_types,
@@ -98,49 +76,40 @@ public class StatisticsActivity extends AppCompatActivity {
             );
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
-
             List<String> uniqueYears = Controller.getInstance().getUniqueYearsOfExpenses(this);
-
-            // Crea un ArrayAdapter usando la lista de años y un diseño de Spinner predeterminado
+            //Configura el arrayAdapter y el spinner usando únicamente los años de los gastos que tenemos
             ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, uniqueYears);
 
-            // Especifica el diseño que se utilizará cuando se desplieguen las opciones
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            // Aplica el ArrayAdapter al Spinner
+            //Aplica el ArrayAdapter al Spinner
             añoEstablecido.setAdapter(adapter2);
 
-            // Establece un listener para manejar las selecciones del usuario
+            //Establece el listener para manejar las selecciones del usuario en función de los años seleccionados
             añoEstablecido.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
                     cambiarTipoGrafico(spinner.getSelectedItem().toString());
-
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) {
-                    // Puedes manejar acciones adicionales si nada está seleccionado
+                    //No hace nada si no hay nada seleccionado
                 }
             });
-
-
-            // Configura el evento de selección del Spinner
+            //Establece un listener para manejar las selecciones del usuario en funcíon de las estadísticas elegidas
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // Lógica para cambiar el tipo de gráfico según la selección
+
                     String chartType = parentView.getItemAtPosition(position).toString();
                     cambiarTipoGrafico(chartType);
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) {
-                    // Puedes manejar acciones adicionales si nada está seleccionado
+                    //No hace nada si no hay nada seleccionado
                 }
             });
-
             // Configura el gráfico inicial
             configurarGraficoPorCategorias();
         }
@@ -154,17 +123,12 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private void cambiarTipoGrafico(String tipoGrafico) {
-        // Lógica para cambiar el tipo de gráfico según la selección del Spinner
-        // Aquí puedes agregar lógica para diferentes tipos de gráficos
 
         String[] chartTypes = getResources().getStringArray(R.array.chart_types);
-
-// Accede a cada elemento del array
         String porCategorias = chartTypes[0];
         String porTipoDePago = chartTypes[1];
         String dineroGastadoPorMes = chartTypes[2];
         String informacionGeneral = chartTypes[3];
-
 
         if (porCategorias.equals(tipoGrafico)) {
             configurarGraficoPorCategorias();
@@ -181,17 +145,12 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private void configurarGraficoPorMes() {
 
-
-        List<BarEntry> barEntries = Controller.getInstance().getMonthlyBarChartData(this,añoEstablecido.getSelectedItem().toString());  // Implementa este método según tus necesidades
-
+        List<BarEntry> barEntries = Controller.getInstance().getMonthlyBarChartData(this,añoEstablecido.getSelectedItem().toString());
         BarDataSet barDataSet = new BarDataSet(barEntries, "Dinero Gastado por Mes en 2023");
         BarData barData = new BarData(barDataSet);
-
-
         barDataSet.setValueTextSize(15f);
         barDataSet.setValueTextColor(colorTexto);
         barChart.setData(barData);
-
         // Configuración adicional del gráfico de barras
         barChart.getDescription().setEnabled(false);
         barChart.animateY(1000);
@@ -209,31 +168,30 @@ public class StatisticsActivity extends AppCompatActivity {
 
         // Configura el eje Y
         YAxis yAxisRight = barChart.getAxisRight();
-        yAxisRight.setEnabled(false);  // Desactiva el eje Y derecho si no lo necesitas
+        yAxisRight.setEnabled(false);
         YAxis yAxis = barChart.getAxisLeft();
         yAxis.setTextSize(15f);
         yAxis.setTextColor(colorTexto);
         yAxis.setAxisLineColor(colorTexto);
         yAxis.setAxisMinimum(0f);
 
-        barChart.setExtraBottomOffset(20f); // Espacio adicional en la parte inferior
-        barChart.setExtraLeftOffset(20f);   // Espacio adicional en el lado izquierdo
+        barChart.setExtraBottomOffset(20f);
+        barChart.setExtraLeftOffset(20f);
         barChart.getAxisLeft().setGridColor(Color.BLACK);
-        barChart.setTouchEnabled(false);  // Desactiva la interacción táctil (zoom y pan)
-        barChart.setScaleEnabled(false);  // Desactiva el escalado (zoom)
+        barChart.setTouchEnabled(false);
+        barChart.setScaleEnabled(false);
         barChart.setPinchZoom(false);
         barChart.setNoDataTextColor(colorTexto);
         barData.setBarWidth(0.5f);
 
-
-
+        // Configurar la leyenda del gráfico de barras
         Legend legend = barChart.getLegend();
-        legend.setTextSize(12f);  // Establece el tamaño del texto de la leyenda
+        legend.setTextSize(12f);
         legend.setTextColor(colorTexto);
 
+        //Establezco la visibilidad de los gráficos en función de lo que el usuario elige
 
         textView.setVisibility(View.GONE);
-
         textInfo1.setVisibility(View.GONE);
         textInfo2.setVisibility(View.GONE);
         textInfo3.setVisibility(View.GONE);
@@ -242,37 +200,25 @@ public class StatisticsActivity extends AppCompatActivity {
         textInfoA2.setVisibility(View.GONE);
         textInfoA3.setVisibility(View.GONE);
         textInfoA4.setVisibility(View.GONE);
-
         barChart.setVisibility(View.VISIBLE);
-
-        // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.GONE);
-
     }
 
     private class MyXAxisValueFormatter extends ValueFormatter {
         @Override
         public String getAxisLabel(float value, AxisBase axis) {
-            // Retorna la etiqueta para cada valor en el eje X (suponiendo que los valores son números de mes)
-            // Puedes personalizar esto según tus necesidades
             int month = (int) value;
             return obtenerNombreMes(month);
         }
-
         // Implementa esta función para obtener el nombre del mes según su número (1 para enero, 2 para febrero, etc.)
         private String obtenerNombreMes(int month) {
-            // Implementa lógica para obtener el nombre del mes según su número
-            // Puedes usar un array de strings, un switch, o cualquier otra lógica que prefieras
             String[] nombresMeses = {"E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"};
-
             return nombresMeses[month - 1];
         }
     }
-
     private void configurarInformacionGeneral() {
 
         List<String> mostUsedCategories = Controller.getInstance().getMostUsedCategories(this,añoEstablecido.getSelectedItem().toString());
-
         List<String> mostUsedPaymentMethods = Controller.getInstance().getMostUsedPaymentMethod(this,añoEstablecido.getSelectedItem().toString());
 
         textInfoA1.setText(Controller.getInstance().getHighestExpense(this,añoEstablecido.getSelectedItem().toString()));
@@ -283,32 +229,22 @@ public class StatisticsActivity extends AppCompatActivity {
             aux += s + ", ";
         }
 
-        // Verifica que la cadena no esté vacía y luego elimina la última coma y espacio
         if (!aux.isEmpty()) {
             aux = aux.substring(0, aux.length() - 2);
         }
-
         textInfoA3.setText(aux);
-
         aux = "";
         for (String s : mostUsedPaymentMethods) {
             aux += s + ", ";
         }
 
-        // Verifica que la cadena no esté vacía y luego elimina la última coma y espacio
         if (!aux.isEmpty()) {
             aux = aux.substring(0, aux.length() - 2);
         }
 
         textInfoA4.setText(aux);
-
-
         barChart.setVisibility(View.GONE);
-
-
-        // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.GONE);
-        // Hacer visible el TextView
         textInfo1.setVisibility(View.VISIBLE);
         textInfo2.setVisibility(View.VISIBLE);
         textInfo3.setVisibility(View.VISIBLE);
@@ -317,38 +253,25 @@ public class StatisticsActivity extends AppCompatActivity {
         textInfoA2.setVisibility(View.VISIBLE);
         textInfoA3.setVisibility(View.VISIBLE);
         textInfoA4.setVisibility(View.VISIBLE);
-
-
-
     }
-
-
-
-
-
     private void configurarGraficoPorTipodepago() {
-
+        // Configura el gráfico de tipos de pago
         List<PieEntry> entries = new ArrayList<>();
         int entryCount = entries.size();
-        float textSize = entryCount > 5 ? 12f : 15f; // Tamaño más grande si hay menos entradas
+        float textSize = entryCount > 5 ? 12f : 15f;
         for(Pair<String, Double> p : Controller.getInstance().showPayMethodStatistics(this,añoEstablecido.getSelectedItem().toString())){
             if(p.second > 0) {
                 entries.add(new PieEntry(p.second.floatValue(), p.first));
             }
         }
-
-        // ... Lógica para obtener los datos
         PieDataSet dataSet = new PieDataSet(entries, "Tipo de pago");
         String centerText = "Tipo de pago";
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataSet.setValueTextColor(Color.WHITE); // Establece el color del texto de los valores
-        dataSet.setValueTextSize(20f); // Establece el tamaño del texto de los valores
-        // ... Configuración adicional del gráfico
+        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueTextSize(20f);
         actualizarGrafico(dataSet,centerText,textSize);
 
-        // Hacer visible el TextView
         textView.setVisibility(View.GONE);
-
         textInfo1.setVisibility(View.GONE);
         textInfo2.setVisibility(View.GONE);
         textInfo3.setVisibility(View.GONE);
@@ -357,26 +280,22 @@ public class StatisticsActivity extends AppCompatActivity {
         textInfoA2.setVisibility(View.GONE);
         textInfoA3.setVisibility(View.GONE);
         textInfoA4.setVisibility(View.GONE);
-
         barChart.setVisibility(View.GONE);
-        // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.VISIBLE);
     }
 
 
     private void configurarGraficoPorCategorias() {
-        // Configura el gráfico con datos de categorías
 
+        // Configura el gráfico de categorías
         List<PieEntry> entries = new ArrayList<>();
         int entryCount = entries.size();
-        float textSize = entryCount > 5 ? 15f : 13f; // Tamaño más grande si hay menos entradas
+        float textSize = entryCount > 5 ? 15f : 13f;
         for(Pair<String, Double> p : Controller.getInstance().showCategoryStatistics(this,añoEstablecido.getSelectedItem().toString())){
             if(p.second > 0) {
                 entries.add(new PieEntry(p.second.floatValue(), p.first));
             }
         }
-
-        // ... Lógica para obtener los datos
         PieDataSet dataSet = new PieDataSet(entries, "Categorias");
         String centerText = "Categoría";
         int[] colors = {
@@ -392,13 +311,11 @@ public class StatisticsActivity extends AppCompatActivity {
                 Color.rgb(255, 158, 128)  // Naranja suave
         };
         dataSet.setColors(colors);
-        dataSet.setValueTextColor(Color.WHITE); // Establece el color del texto de los valores
-        dataSet.setValueTextSize(20f); // Establece el tamaño del texto de los valores
-        // ... Configuración adicional del gráfico
+        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueTextSize(20f);
         actualizarGrafico(dataSet,centerText,textSize);
 
         textView.setVisibility(View.GONE);
-
         textInfo1.setVisibility(View.GONE);
         textInfo2.setVisibility(View.GONE);
         textInfo3.setVisibility(View.GONE);
@@ -407,13 +324,9 @@ public class StatisticsActivity extends AppCompatActivity {
         textInfoA2.setVisibility(View.GONE);
         textInfoA3.setVisibility(View.GONE);
         textInfoA4.setVisibility(View.GONE);
-
         barChart.setVisibility(View.GONE);
-
-        // Ocultar el gráfico (si es necesario)
         pieChart.setVisibility(View.VISIBLE);
     }
-
     private void actualizarGrafico(PieDataSet dataSet,String centerText,float textSize) {
         PieData data = new PieData(dataSet);
         pieChart.setData(data);
@@ -423,21 +336,12 @@ public class StatisticsActivity extends AppCompatActivity {
         pieChart.getDescription().setEnabled(false);
         pieChart.animateY(1000);
         pieChart.setDrawEntryLabels(false);
-
-        // Configuración de la leyenda (Legend)
         Legend legend = pieChart.getLegend();
-        legend.setOrientation(Legend.LegendOrientation.VERTICAL); // Orientación vertical
-
-        pieChart.setExtraBottomOffset(25f); // Ajusta el espacio adicional en la parte inferior del gráfico
+        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        pieChart.setExtraBottomOffset(25f);
         pieChart.setExtraLeftOffset(20f);
-
-        //legend.setFormSize(15f); // Tamaño de las letras en la leyenda
-        // Calcular el tamaño del texto proporcional al número de entradas
-        legend.setTextSize(textSize); // Establecer el tamaño del texto de la leyenda
-
+        legend.setTextSize(textSize);
         legend.setTextColor(colorTexto);
-
         pieChart.invalidate();
     }
-
 }

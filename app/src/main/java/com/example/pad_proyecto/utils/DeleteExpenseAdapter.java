@@ -1,7 +1,6 @@
 package com.example.pad_proyecto.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +9,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.pad_proyecto.R;
-
-import com.example.pad_proyecto.activities.ExpenseViewActivity;
 import com.example.pad_proyecto.data.Expense;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DeleteExpenseAdapter extends RecyclerView.Adapter<DeleteExpenseAdapter.ViewHolder> {
 
     private LinkedList<Expense> list;
     private Context context;
     private final LinkedList<Expense> selectedExpenses = new LinkedList<>();
-
-
 
     public DeleteExpenseAdapter(LinkedList<Expense> list, Context context) {
         this.list = list;

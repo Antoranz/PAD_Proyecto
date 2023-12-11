@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class User implements Serializable {
-
     private long id;
     private String userName;
     private Double totalMoneySpent = 0.0;
@@ -17,7 +16,6 @@ public class User implements Serializable {
         this.userName = userName;
         this.budget = null;
     }
-
     public void initInfo(List<Expense> el) {
         expenseList = el;
     }
@@ -26,27 +24,21 @@ public class User implements Serializable {
     public String getUserName() {
         return userName;
     }
-
     public Double getTotalMoneySpent() {
         return totalMoneySpent;
     }
-
     public void setTotalMoneySpent(Double tm){
         totalMoneySpent=tm;
     }
-
     public void setBudget(Double b) {
         budget = b;
     }
-
     public Double getBudget() {
         return budget;
     }
-
     public List<Expense> getExpensesList() {
         return expenseList;
     }
-
     public void addExpense(Expense e) {
         if (expenseList == null) {
             expenseList = new ArrayList<>();
@@ -58,7 +50,6 @@ public class User implements Serializable {
         expenseList.add(e);
         expenseList.sort((expense1, expense2) -> expense1.getTimeDate().compareTo(expense2.getTimeDate()));
     }
-
     public void deleteExpense(Expense e) {
         totalMoneySpent -= e.getMoneySpent();
         expenseList.remove(e);
@@ -70,9 +61,11 @@ public class User implements Serializable {
         for(int i=0;i<e.size();i++){
             totalMoneySpent -= e.get(i).getMoneySpent();
             expenseList.remove(e);
+            if(budget!=null){
+                budget+=e.get(i).getMoneySpent();
+            }
         }
     }
-
     public void editExpense(Expense e, Expense eActualizado) {
         totalMoneySpent -= e.getMoneySpent();
         totalMoneySpent += eActualizado.getMoneySpent();
@@ -81,9 +74,11 @@ public class User implements Serializable {
                 eAux.update(eActualizado);
             }
         }
+        if(budget!=null){
+            budget-=(eActualizado.getMoneySpent()-e.getMoneySpent());
+        }
         e.update(eActualizado);
     }
-
     public void reset() {
         totalMoneySpent = 0.0;
         budget = 0.0;

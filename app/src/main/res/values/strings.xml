@@ -42,13 +42,13 @@
         <item>Por tipo de pago</item>
         <item>Dinero Gastado por Mes</item>
         <item>Informacion General</item>
-        <!-- Puedes agregar más opciones según tus necesidades -->
+
     </string-array>
     <string-array name="year_types">
         <item>Por categorías</item>
         <item>Por tipo de pago</item>
         <item>Dinero Gastado por Mes</item>
         <item>Informacion General</item>
-        <!-- Puedes agregar más opciones según tus necesidades -->
+
     </string-array>
 </resources>

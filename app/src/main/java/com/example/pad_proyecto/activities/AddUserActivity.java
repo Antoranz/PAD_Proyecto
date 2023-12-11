@@ -1,7 +1,6 @@
 package com.example.pad_proyecto.activities;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,16 +13,13 @@ import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.NavigationManager;
 
 public class AddUserActivity extends AppCompatActivity {
-
     private EditText name;
     private EditText budget;
     private Button iniciar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
-
         name = findViewById(R.id.editTextName);
         budget = findViewById(R.id.editTextNumberDecimal);
         iniciar =findViewById(R.id.buttonIniciar);
@@ -39,5 +35,4 @@ public class AddUserActivity extends AppCompatActivity {
             }
         });
     }
-
 }

@@ -1,14 +1,9 @@
 package com.example.pad_proyecto.databases;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
-
 import com.example.pad_proyecto.data.Expense;
-import com.example.pad_proyecto.data.User;
 import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
-
 import java.util.LinkedList;
 import java.util.List;
 

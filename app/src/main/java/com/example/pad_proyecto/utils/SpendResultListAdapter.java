@@ -1,27 +1,19 @@
 package com.example.pad_proyecto.utils;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
-
 import java.util.LinkedList;
 import java.util.List;
 
 public class SpendResultListAdapter extends RecyclerView.Adapter<SpendResultListAdapter.ViewHolder> {
-
     protected LinkedList<Expense> expenseList;
 
     protected Context context;

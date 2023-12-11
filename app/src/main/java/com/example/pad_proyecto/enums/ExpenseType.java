@@ -13,5 +13,4 @@ public enum ExpenseType {
     Viajes,
     Donaciones,
     Otros
-
 }

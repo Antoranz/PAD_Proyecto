@@ -5,28 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.data.User;
 import com.example.pad_proyecto.enums.ExpenseType;
 import com.example.pad_proyecto.enums.PayMethod;
-
 import java.io.File;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
-
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "spendwise.db";
-
     private static final String TABLE_EXPENSE = "Expense";
     private static final String COLUMN_ID = "expenseId";
     private static final String COLUMN_NAME = "expenseName";
@@ -41,7 +35,6 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
     private static final String COLUMN_USER_NAME = "userName";
     private static final String COLUMN_BUDGET = "budget";
     private static final String COLUMN_USER_TOTALMONEY = "totalMonaySpent";
-
     private static DAOImp instance;
     public static synchronized DAOImp getInstance(Context context) {
         if (instance == null) {
@@ -258,12 +251,12 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             Double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-            // Crea un objeto Instant utilizando el valor long
+
             Instant instant = null;
             Date fecha = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 instant = Instant.ofEpochMilli(timeDateInMillis);
-                // Convierte el Instant a un objeto Date
+
                fecha = Date.from(instant);
 
             }
@@ -308,7 +301,7 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             Double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-            // Crea un objeto Instant utilizando el valor long
+
             Instant instant = null;
             Date fecha = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -353,12 +346,11 @@ public class DAOImp extends SQLiteOpenHelper implements ExpenseDAO, UserDAO{
             Double moneySpent = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONEY_SPENT));
 
             long timeDateInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TIME_DATE));
-            // Crea un objeto Instant utilizando el valor long
+
             Instant instant = null;
             Date fecha = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 instant = Instant.ofEpochMilli(timeDateInMillis);
-                // Convierte el Instant a un objeto Date
                 fecha = Date.from(instant);
 
             }

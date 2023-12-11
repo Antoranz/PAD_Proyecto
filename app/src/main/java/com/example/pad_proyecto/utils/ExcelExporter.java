@@ -4,16 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
-
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -64,14 +60,11 @@ public class ExcelExporter {
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-
             File file = new File(directory, fileName);
-
             try (FileOutputStream fileOut = new FileOutputStream(file)) {
                 workbook.write(fileOut);
                 filePath = file.getAbsolutePath();
             }
-
             Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             Uri contentUri = Uri.fromFile(file);
             mediaScanIntent.setData(contentUri);

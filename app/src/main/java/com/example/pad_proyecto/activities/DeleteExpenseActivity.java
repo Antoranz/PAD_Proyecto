@@ -1,7 +1,6 @@
 package com.example.pad_proyecto.activities;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,23 +14,19 @@ import com.example.pad_proyecto.utils.DeleteExpenseAdapter;
 import com.example.pad_proyecto.utils.NavigationManager;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class DeleteExpenseActivity extends AppCompatActivity {
     private DeleteExpenseAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_view);
         initIGUI();
     }
-
     private void initIGUI() {
         RecyclerView rv = findViewById(R.id.recyclerViewDelete);
-
-        LinkedList<Expense> expensesList = Controller.getInstance().getAllExpenses(this); // Tu lista de gastos
-
+        // Tu lista de gastos
+        LinkedList<Expense> expensesList = Controller.getInstance().getAllExpenses(this);
         // Inicializa el RecyclerView y su adaptador
         adapter = new DeleteExpenseAdapter(expensesList, this);
 
@@ -39,9 +34,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(adapter);
-
         Button button = findViewById(R.id.deleteButton);
-
         button.setOnClickListener(v -> {
             LinkedList<Expense> selectedExpenses = adapter.getSelectedExpenses();
 
@@ -49,7 +42,6 @@ public class DeleteExpenseActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             NavigationManager.getInstance().navigateToDeleteExpense(v.getContext());
         });
-
         Button selectAllButton = findViewById(R.id.SelectAllbutton);
         selectAllButton.setOnClickListener(v -> {
 

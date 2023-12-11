@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
-
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
 import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,13 +16,10 @@ import java.util.List;
 public class JsonExporter {
 
     public static void exportExpensesToJson(Context context, List<Expense> expenses, String fileName) {
-        // Convertir la lista de gastos a formato JSON
-        String jsonExpenses = convertExpensesListToJson(expenses);
 
-        // Guardar el JSON en un archivo
+        String jsonExpenses = convertExpensesListToJson(expenses);
         saveJsonToExternalStorage(context, jsonExpenses, fileName);
     }
-
     private static String convertExpensesListToJson(List<Expense> expenses) {
         Gson gson = new Gson();
         return gson.toJson(expenses);

@@ -7,5 +7,4 @@ public enum PayMethod {
     TarjetaDebito,
     Transferencia,
     PagoMovil
-
 }

@@ -3,7 +3,6 @@ package com.example.pad_proyecto.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import com.example.pad_proyecto.activities.AddExpenseActivity;
 import com.example.pad_proyecto.activities.AddUserActivity;
 import com.example.pad_proyecto.activities.DeleteExpenseActivity;
@@ -20,16 +19,13 @@ import com.example.pad_proyecto.data.Expense;
 
 public class NavigationManager {
     private static NavigationManager instance;
-
     private NavigationManager() {}
-
     public static synchronized NavigationManager getInstance() {
         if (instance == null) {
             instance = new NavigationManager();
         }
         return instance;
     }
-
     public void navigateToExpenseView(Context context, Expense expense) {
         if (context != null) {
             Intent intent = new Intent(context, ExpenseViewActivity.class);

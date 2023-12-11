@@ -1,24 +1,15 @@
 package com.example.pad_proyecto.activities;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.example.pad_proyecto.R;
 import com.example.pad_proyecto.data.Expense;
-import com.example.pad_proyecto.data.User;
-import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.NavigationManager;
 
 import java.io.File;
@@ -33,7 +24,6 @@ public class ExpenseViewActivity extends AppCompatActivity {
     private TextView nota;
     private ImageView img;
 
-
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +36,6 @@ public class ExpenseViewActivity extends AppCompatActivity {
                 e = (Expense) extras.getSerializable("expense");
             }
         }
-
         gasto = findViewById(R.id.expenseName);
         fecha = findViewById(R.id.timeDate);
         dineroGastado =findViewById(R.id.spentMoney);
@@ -54,7 +43,6 @@ public class ExpenseViewActivity extends AppCompatActivity {
         categoria =findViewById(R.id.expenseType);
         nota =findViewById(R.id.noteExpense);
         img = findViewById(R.id.galleryImageView);
-
 
         gasto.setText(e.getExpenseName());
         fecha.setText(e.writeDate());
@@ -66,34 +54,20 @@ public class ExpenseViewActivity extends AppCompatActivity {
         String imagen = e.getImagePath();
 
         if(imagen != null){
-
             String imagePath = this.getFilesDir() + "/" + imagen;
             File imgFile = new File(imagePath);
-
             if(imgFile.exists()){
                 Uri imgUri = Uri.fromFile(imgFile);
 
                 Glide.with(this)
                         .load(imgUri)
                         .into(img);
-
-
-
-
             }
-
         }
-
         img.setOnClickListener(v -> {
             if(imagen!=null){
                 NavigationManager.getInstance().navigateToFullScreenView(this,imagen);
             }
-
         });
-
-
-
-
     }
-
 }

@@ -43,14 +43,14 @@
         <item>By payment type</item>
         <item>Money Spent per Month</item>
         <item>General Information</item>
-        <!-- You can add more options as needed -->
+
     </string-array>
     <string-array name="year_types">
         <item>By category</item>
         <item>By payment type</item>
         <item>Money Spent per Month</item>
         <item>General Information</item>
-        <!-- You can add more options as needed -->
+
     </string-array>
 
 </resources>

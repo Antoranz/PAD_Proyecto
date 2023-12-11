@@ -36,23 +36,19 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 public class AddExpenseActivity extends AppCompatActivity {
-
     private ActivityResultLauncher<Intent> imagePickerLauncher;
     private String imageName;
     private String selectedImagePath;
     private boolean imageSelected;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
         initUI();
     }
-
     private void initUI() {
         // Obtener referencias a las vistas
         EditText expenseName = findViewById(R.id.expenseText);
@@ -77,7 +73,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 noteText.getText().toString()
         ));
 
-        // Inicializar el ActivityResultLauncher para el selector de imágenes
+
         imagePickerLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
@@ -85,23 +81,18 @@ public class AddExpenseActivity extends AppCompatActivity {
                         if (data != null) {
                             Uri uri = data.getData();
                             if (uri != null) {
-                                // Guardar la URI temporalmente para que se copie solo si el usuario guarda
                                 String fileName = getImageFileNameFromUri(uri);
                                 imageName = fileName;
                                 selectedImagePath = uri.toString();
-
-                                // Actualizar la vista con la imagen seleccionada temporalmente
                                 Bitmap imageBitmap = getBitmapFromUri(this, uri);
                                 galleryImage.setImageBitmap(imageBitmap);
-
-                                // Configurar la variable de imagen seleccionada
                                 imageSelected = true;
                             }
                         }
                     }
                 });
 
-        // Inicializar el spinner con las categorías
+        // Inicializar el spinner con las categorías y los tipos de pago
         ExpenseType[] categoryValues = ExpenseType.values();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Arrays.stream(categoryValues)
                 .map(Enum::name)
@@ -124,7 +115,6 @@ public class AddExpenseActivity extends AppCompatActivity {
             String warning = getString(R.string.q_ms);
             showWarningDialog(warning);
         } else {
-            // Crear el objeto Expense
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date fecha = null;
             try {
@@ -154,26 +144,20 @@ public class AddExpenseActivity extends AppCompatActivity {
                         }
                     }
                 }
-                // Guardar el gasto
+                // Guardar el gasto y añadirle a la lista de gastos
                 Controller.getInstance().addExpense(newExpense, this);
-
-                // Navegar a la actividad de historial de gastos
+                // Navegar a la actividad del main activity
                 NavigationManager.getInstance().navigateToMenuView(this);
             } catch (ParseException e) {
                 String warning = getString(R.string.q_fecha);
                 showWarningDialog(warning);
             }
-
         }
     }
-
-    // Rest
-
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         imagePickerLauncher.launch(intent);
     }
-
     private Bitmap getBitmapFromUri(Context context, Uri uri) {
         try {
             InputStream inputStream = context.getContentResolver().openInputStream(uri);
@@ -183,7 +167,6 @@ public class AddExpenseActivity extends AppCompatActivity {
             return null;
         }
     }
-
     private void copyImageToAppDataDirectory(Uri sourceUri, String targetFileName) {
         try {
             InputStream sourceStream = getContentResolver().openInputStream(sourceUri);

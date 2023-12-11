@@ -1,7 +1,6 @@
 package com.example.pad_proyecto.utils;
 
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +40,6 @@ public class JokeApiTask {
 
             try {
                 urlConnection.setRequestMethod("GET");
-
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;

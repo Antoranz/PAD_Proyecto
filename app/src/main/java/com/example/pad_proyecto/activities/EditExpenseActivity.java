@@ -37,25 +37,20 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 public class EditExpenseActivity extends AppCompatActivity {
-
     private ActivityResultLauncher<Intent> imagePickerLauncher;
     private String imageName;
     private String selectedImagePath;
     private boolean imageSelected;
-
     private Expense e;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
         initUI();
     }
-
     private void initUI() {
 
         if (android.os.Build.VERSION.SDK_INT >= 31) {
@@ -77,36 +72,24 @@ public class EditExpenseActivity extends AppCompatActivity {
         Spinner PayMethodSpinner = findViewById(R.id.expenseMethod);
         EditText noteText = findViewById(R.id.noteText);
 
-
         expenseName.setText(e.getExpenseName());
         expenseDate.setText(e.writeDate());
         moneySpent.setText(e.getMoneySpent().toString());
         noteText.setText(e.getNote());
 
         String imagen = e.getImagePath();
-
         String imagePath = this.getFilesDir() + "/" + imagen;
         File imgFile = new File(imagePath);
-
         if(imagen != null){
-
-
             if(imgFile.exists()){
-
                 Uri imgUri = Uri.fromFile(imgFile);
-
                 Glide.with(this)
                         .load(imgUri)
                         .into(galleryImage);
-
             }
-
         }
-
-
         // Manejador para el botón de seleccionar imagen
         galleryImage.setOnClickListener(v -> openImagePicker());
-
         // Manejador para el botón de guardar
         saveButton.setOnClickListener(v -> handleSaveExpense(
                 expenseName.getText().toString(),
@@ -117,10 +100,8 @@ public class EditExpenseActivity extends AppCompatActivity {
                 noteText.getText().toString(),
                 imgFile
         )
-
         );
 
-        // Inicializar el ActivityResultLauncher para el selector de imágenes
         imagePickerLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
@@ -128,15 +109,11 @@ public class EditExpenseActivity extends AppCompatActivity {
                         if (data != null) {
                             Uri uri = data.getData();
                             if (uri != null) {
-                                // Guardar la URI temporalmente para que se copie solo si el usuario guarda
                                 String fileName = getImageFileNameFromUri(uri);
                                 imageName = fileName;
                                 selectedImagePath = uri.toString();
-                                // Actualizar la vista con la imagen seleccionada temporalmente
                                 Bitmap imageBitmap = getBitmapFromUri(this, uri);
                                 galleryImage.setImageBitmap(imageBitmap);
-
-                                // Configurar la variable de imagen seleccionada
                                 imageSelected = true;
                             }
                         }
@@ -155,7 +132,7 @@ public class EditExpenseActivity extends AppCompatActivity {
         if (selectedIndex != -1) {
             categorySpinner.setSelection(selectedIndex);
         }
-
+        // Inicializar el spinner con los tipos de pago
         PayMethod[] PayMethodValues = PayMethod.values();
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Arrays.stream(PayMethodValues)
                 .map(Enum::name)
@@ -167,8 +144,6 @@ public class EditExpenseActivity extends AppCompatActivity {
         if (selectedIndex != -1) {
             PayMethodSpinner.setSelection(selectedIndex);
         }
-
-
     }
 
     private void handleSaveExpense(String expenseName,String expenseDate, String moneySpent, String selectedPayMethod, String selectedCategory, String note, File imgFile) {
@@ -187,19 +162,12 @@ public class EditExpenseActivity extends AppCompatActivity {
                 fecha = formato.parse(expenseDate);
                 String result;
                 if (imageSelected) {
-
                     result = imageName;
-
                     if(imgFile.exists()){
-
                         imgFile.delete();
-
                     }
-
-
                 } else {
                     result = e.getImagePath();
-
                 }
                 ExpenseType selectedCategoryEnum = ExpenseType.valueOf(selectedCategory);
                 PayMethod selectedPaymentMethod =  PayMethod.valueOf(selectedPayMethod);
@@ -220,10 +188,9 @@ public class EditExpenseActivity extends AppCompatActivity {
                         }
                     }
                 }
-                // Guardar el gasto
+                // Guardar el gasto modificado y modificarlo en la lista
                 Controller.getInstance().editExpense( this,e,newExpense);
-
-                // Navegar a la actividad de historial de gastos
+                // Navegar a la actividad main activity
                 NavigationManager.getInstance().navigateToMenuView(this);
             } catch (ParseException e) {
                 String warning = getString(R.string.q_fecha);
@@ -232,9 +199,6 @@ public class EditExpenseActivity extends AppCompatActivity {
 
         }
     }
-
-    // Rest
-
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         imagePickerLauncher.launch(intent);
@@ -270,7 +234,6 @@ public class EditExpenseActivity extends AppCompatActivity {
         }
     }
 
-
     private String getImageFileNameFromUri(Uri uri) {
         Cursor cursor = getContentResolver().query(uri, null, null, null, null);
         if (cursor != null) {
@@ -287,21 +250,6 @@ public class EditExpenseActivity extends AppCompatActivity {
         }
         return "expense_image.jpg"; // Valor por defecto si no se puede obtener el nombre
     }
-
-    private Bitmap getBitmapFromFilePath(String filePath) {
-        try {
-            File file = new File(filePath);
-            if (file.exists()) {
-                return BitmapFactory.decodeFile(filePath);
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     private void showWarningDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.advertencia))

@@ -55,7 +55,6 @@
                 android:inputType="date"
                 android:minHeight="48dp" />
 
-            <!---  android:src="@drawable/background_image" faltaria la imagen que no se si hay que incluirla -->
 
 
             <TextView

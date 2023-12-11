@@ -1,7 +1,6 @@
 package com.example.pad_proyecto.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -12,15 +11,10 @@ import com.example.pad_proyecto.data.Expense;
 import com.example.pad_proyecto.utils.Controller;
 import com.example.pad_proyecto.utils.ExcelExporter;
 import com.example.pad_proyecto.utils.JsonExporter;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 
 public class ExportExpenseActivity extends AppCompatActivity {
-
     Button jsonButton;
     Button excelButton;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,9 +24,7 @@ public class ExportExpenseActivity extends AppCompatActivity {
         jsonButton.setOnClickListener(v -> {
             List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
             JsonExporter.exportExpensesToJson(this, expenses, "expenses.json");
-
             Toast.makeText(this, getString(R.string.q_json), Toast.LENGTH_SHORT).show();
-
         });
         excelButton = findViewById(R.id.xlsxButton);
         excelButton.setOnClickListener(v -> {

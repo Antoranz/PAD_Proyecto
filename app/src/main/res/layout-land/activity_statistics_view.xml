@@ -29,7 +29,6 @@
             android:layout_marginBottom="10dp"
             />
 
-        <!-- Añade el TextView adicional y configúralo según tus necesidades -->
         <TextView
             android:id="@+id/InformacionAdicional"
             android:layout_width="wrap_content"

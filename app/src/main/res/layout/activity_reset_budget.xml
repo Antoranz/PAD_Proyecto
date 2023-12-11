@@ -6,10 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TextView para el mensaje -->
-
-    <!-- EditText para el presupuesto -->
-
     <TextView
         android:id="@+id/textViewAdvertencia"
         android:layout_width="301dp"
@@ -27,8 +23,8 @@
         android:id="@+id/textViewMensaje"
         android:layout_width="260dp"
         android:layout_height="23dp"
-        android:text="Escribe el presupuesto deseado:"
-        android:textColor="@android:color/black"
+        android:text="@string/presupuesto"
+        android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
