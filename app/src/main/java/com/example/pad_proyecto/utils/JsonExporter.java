@@ -35,27 +35,22 @@ public class JsonExporter {
         String filePath = null;
 
         try {
-            // Crear un directorio para almacenar archivos si no existe
+
             File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "SpendWise");
             if (!directory.exists()) {
                 directory.mkdirs();
             }
 
-            // Crear el archivo JSON
             File file = new File(directory, fileName);
 
-            // Verificar si el archivo ya existe
             if (file.exists()) {
-                // Puedes optar por no sobrescribir o mostrar un mensaje diferente si lo prefieres
-                // En este ejemplo, simplemente no se muestra el mensaje de error
             } else {
-                // Si el archivo no existe, procede con la creación y escritura
+
                 try (FileWriter writer = new FileWriter(file)) {
                     writer.write(jsonExpenses);
                     filePath = file.getAbsolutePath();
                 }
 
-                // Escanea el archivo para que aparezca en el explorador de archivos
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 Uri contentUri = Uri.fromFile(file);
                 mediaScanIntent.setData(contentUri);

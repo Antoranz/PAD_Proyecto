@@ -47,15 +47,8 @@ public class ExcelExporter {
             row.createCell(6).setCellValue(expense.getNote());
         }
 
-        // Guarda el libro de trabajo en un archivo
         String filePath = saveWorkbookToExternalStorage(context, workbook, fileName);
 
-        if (filePath != null) {
-            openExcelFile(context, filePath);
-        } else {
-            Toast.makeText(context, context.getString(R.string.q_error_excel), Toast.LENGTH_SHORT).show();
-        }
-        // Cierra el libro de trabajo
         try {
             workbook.close();
         } catch (IOException e) {
@@ -79,7 +72,6 @@ public class ExcelExporter {
                 filePath = file.getAbsolutePath();
             }
 
-            // Escanea el archivo para que aparezca en el explorador de archivos
             Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             Uri contentUri = Uri.fromFile(file);
             mediaScanIntent.setData(contentUri);
@@ -92,17 +84,5 @@ public class ExcelExporter {
         return filePath;
     }
 
-    private static void openExcelFile(Context context, String filePath) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = Uri.parse("file://" + filePath);
-        intent.setDataAndType(uri, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(Intent.createChooser(intent, "Open with"));
-        } else {
-            Toast.makeText(context, context.getString(R.string.q_app_excel), Toast.LENGTH_SHORT).show();
-        }
-    }
 }
 

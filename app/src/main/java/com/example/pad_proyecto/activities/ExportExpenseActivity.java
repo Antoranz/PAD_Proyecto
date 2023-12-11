@@ -36,10 +36,14 @@ public class ExportExpenseActivity extends AppCompatActivity {
         });
         excelButton = findViewById(R.id.xlsxButton);
         excelButton.setOnClickListener(v -> {
-            List<Expense> expenses = Controller.getInstance().getUser().getExpensesList();
-            String filename = "expenses.xlsx";
-            ExcelExporter.exportExpensesToExcel(this, expenses, filename);
-            Toast.makeText(this, getString(R.string.q_excel), Toast.LENGTH_SHORT).show();
+            try{
+                List<Expense> expenses = Controller.getInstance().getAllExpenses(this);
+                String filename = "expenses.xlsx";
+                ExcelExporter.exportExpensesToExcel(this, expenses, filename);
+                Toast.makeText(this, getString(R.string.q_excel), Toast.LENGTH_SHORT).show();
+            }catch (Exception e){
+                Toast.makeText(this, getString(R.string.q_error_excel), Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
